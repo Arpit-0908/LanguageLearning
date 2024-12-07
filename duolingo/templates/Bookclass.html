@@ -1,0 +1,1057 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Class Booking {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+
+</head>
+{% block body %}
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    /* Header Section */
+    .header {
+        background-color: rgba(181, 12, 238, 0.859);
+        color: white;
+        text-align: center;
+        padding: 30px 0;
+    }
+
+    .banner h1 {
+        font-size: 3rem;
+        margin: 0;
+    }
+
+    .banner p {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+
+    /* Booking Section */
+    .booking-section {
+        padding: 40px 20px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        /* Change to column layout */
+        gap: 30px;
+    }
+
+    .class-section {
+        width: 100%;
+    }
+
+    .class-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #333;
+    }
+
+    /* Class Cards */
+    .class-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: space-between;
+    }
+
+    .class-card {
+        width: 300px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: scale(1);
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        margin-bottom: 20px;
+        margin-left: 40px;
+    }
+
+    .class-card:hover {
+        transform: scale(1.15);
+    }
+
+    .class-info {
+        padding: 20px;
+        color: white;
+        background-size: cover;
+        background-position: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .class-info h3 {
+        font-size: 1.8rem;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+
+    .teacher-info {
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+
+    .teacher-info p {
+        margin: 5px 0;
+    }
+
+    /* Booking Section Styling */
+    .class-booking {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-top: 1px solid #ddd;
+    }
+
+    .class-booking h4 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .slots-container {
+        margin-bottom: 20px;
+    }
+
+    .slot-day {
+        margin-bottom: 20px;
+    }
+
+    .slot-day h5 {
+        font-size: 1.2rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .slot-day ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .slot-day li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .slot-day li label,
+    .slot-day li span {
+        font-size: .95rem;
+        color: #555;
+    }
+
+    .slot-day li input {
+        margin-left: 1px;
+    }
+
+    .available {
+        border: 2px solid green;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: green;
+    }
+
+    .filled {
+        border: 2px solid red;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+    }
+
+    /* Book Now Button */
+    .book-button {
+        background-color: #ef440b;
+        font-weight: 600;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        margin-top: 20px;
+        margin-left: 65px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.16em;
+        transition: background-color 0.1s ease;
+    }
+
+    .book-button:hover {
+        background-color: #2c13ea;
+        transform: scale(1.1);
+    }
+
+    /* Style for Past Classes */
+    .past-classes .class-booking {
+        background-color: #ddd;
+    }
+
+    .past-classes .book-button {
+        background-color: #757575;
+        cursor: not-allowed;
+    }
+
+    .past-classes .book-button:hover {
+        background-color: #757575;
+    }
+
+    .past-classes .class-info {
+        background-color: #5c6bc0;
+    }
+
+    .past-classes h2 {
+        color: #757575;
+    }
+
+    .footer {
+        background-color: #1a202c;
+        /* Dark background for contrast */
+        color: #ffffff;
+        /* White text for readability */
+        text-align: center;
+        padding: 20px 10px;
+        font-size: 1rem;
+        border-top: 2px solid #4c51bf;
+        /* Subtle border for separation */
+    }
+
+    .footer p {
+        margin: 0;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .footer ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0 0;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        /* Space between list items */
+    }
+
+    .footer ul li {
+        display: inline;
+    }
+
+    .footer ul li a {
+        color: #4c51bf;
+        /* Soft purple links */
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .footer ul li a:hover {
+        color: #2b6cb0;
+        /* Darker shade on hover */
+        text-decoration: underline;
+        /* Underline for emphasis */
+    }
+
+    .footer ul li a:focus {
+        outline: none;
+        border-bottom: 2px solid #ffffff;
+        /* Visible focus state */
+    }
+</style>
+<!-- Header Section with Banner -->
+<header class="header">
+    <div class="banner">
+        <h1>Book Your Class Now</h1>
+        <p>Choose from available and past classes!</p>
+        
+    </div>
+</header>
+
+<!-- Pop-up Confirmation Message -->
+
+
+
+<script>
+    function submitEmail(event) {
+        event.preventDefault(); // Prevent form submission to keep the page from refreshing
+
+        const emailInput = document.getElementById('email');
+        const confirmationPopup = document.getElementById('confirmation-popup');
+
+        // Reset the placeholder to indicate success
+        emailInput.placeholder = "Email verified successfully!";
+
+        // Show the confirmation pop-up
+        confirmationPopup.style.display = "flex";
+
+        // Hide the pop-up after 3 seconds
+        setTimeout(function () {
+            confirmationPopup.style.display = "none";
+        }, 500);
+
+        // Send email to Django backend via AJAX (fetch API)
+        const email = emailInput.value;
+
+        fetch('/payment/', {  // Post to the same payment view route
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',  // Sending data in JSON format
+                'X-CSRFToken': getCookie('csrftoken')  // Get CSRF token for security
+            },
+            body: JSON.stringify({ email: email })  // Send email as JSON data
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response from the server (e.g., show success or error message)
+                if (data.message === 'Email sent successfully!') {
+                    alert("Payment successful! A confirmation email has been sent.");
+                } else {
+                    alert(data.message);  // Display error message if any
+                }
+            })
+
+    }
+
+    // Function to get CSRF token from cookies for security
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+</script>
+
+<style>
+    .email-input-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    /* Style for the Email Label */
+    .email-label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Style for the Email Input */
+    .email-input {
+        padding: 12px;
+        font-size: 16px;
+        width: 300px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+    }
+
+    /* Focus effect on email input */
+    .email-input:focus {
+        border-color: #4CAF50;
+        outline: none;
+    }
+
+    /* Style for the Confirm Email Button */
+    .confirm-button {
+        padding: 12px 20px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        width: 150px;
+    }
+
+    /* Hover effect on confirm button */
+    .confirm-button:hover {
+        background-color: #45a049;
+        transform: scale(1.05);
+    }
+
+    /* Pop-up Confirmation Message Style */
+    .confirmation-popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .confirmation-popup-content {
+        background-color: #17b9d2;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #333;
+    }
+
+    .popup-close:hover {
+        color: #4CAF50;
+    }
+
+    /* Add responsiveness for mobile screens */
+    @media (max-width: 600px) {
+        .email-input-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .email-input,
+        .confirm-button {
+            width: 100%;
+            max-width: none;
+        }
+
+        .email-label {
+            font-size: 16px;
+            margin-right: 0;
+        }
+
+    }
+</style>
+{% load static %}
+<!-- Booking Section -->
+<section class="booking-section">
+    <div class="container">
+        <!-- Available Classes Section -->
+        <div class="class-section available-classes">
+            <h2>Available Classes</h2>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                <div class="class-container">
+                    <!-- Class Card 1 -->
+                    <div class="class-card">
+                        <div class="class-info"
+                            style="background-image: url('{% static 'img/french-beg.jpg' %}');background-color: rgba(0, 0, 0, 0.4); background-blend-mode: overlay;">
+                            <h3>French Beginners</h3>
+                            <br>
+                            <div class="teacher-info">
+                                <p><strong>Teacher:</strong> Madame Rousseau</p>
+                                <p><strong>Experience:</strong> 3 Years</p>
+                            </div>
+                        </div>
+                        <div class="class-booking">
+                            <h4>Select a Time Slot</h4>
+                            <div class="slots-container">
+                                <div class="slot-day">
+                                    <h5>Monday</h5>
+                                    <ul>
+                                        <li>
+                                            <label>10:00AM - 12:00PM</label>
+                                            <span class="seats">10/20 seats</span>
+                                            <input type="radio" name="time_slot" value="Monday 10:00AM - 12:00PM"
+                                                class="available">
+                                        </li>
+                                        <li>
+                                            <label> 3:00 PM - 5:00 PM</label>
+                                            <span class="seats">14/20 seats</span>
+                                            <input type="radio" name="time_slot" value="Monday 3:00 PM - 5:00 PM"
+                                                class="available">
+                                        </li>
+                                    </ul>
+                                    <br>
+                                    <h5>Thursday</h5>
+                                    <ul>
+                                        <li>
+                                            <label>11:00AM - 1:00PM</label>
+                                            <span class="seats">11/20 seats</span>
+                                            <input type="radio" name="time_slot" value="Thursday 11:00AM - 1:00PM"
+                                                class="available">
+                                        </li>
+                                        <li>
+                                            <label> 5:00 PM - 7:00 PM</label>
+                                            <span class="seats">Fully Booked</span>
+                                            <input type="radio" name="time_slot" class="disabled" disabled>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Hidden Field to Store the Class Name -->
+                            <input type="hidden" name="class_name" value="French Beginners">
+
+                            <!-- Book Now button to submit the form -->
+                            <button type="submit" class="book-button">Book Now</button>
+                        </div>
+                    </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                <!-- Repeat for other available classes -->
+                <!-- Class Card for French Advanced -->
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/french-ad.jpg' %}'); background-color: rgba(0, 0, 0, 0.5); background-blend-mode: overlay;">
+                        <h3>French Advanced</h3>
+                        <br>
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Monsieur Bouchard</p>
+                            <p><strong>Experience:</strong> 4.5 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Monday</h5>
+                                <ul>
+                                    <li>
+                                        <label>1:00PM - 2:30PM</label>
+                                        <span class="seats">16/20 seats</span>
+                                        <input type="radio" name="time_slot" value="Monday 1:00PM - 2:30PM"
+                                            class="available">
+                                    </li>
+                                    <li>
+                                        <label>5:30 PM - 7:00 PM</label>
+                                        <span class="seats">7/20 seats</span>
+                                        <input type="radio" name="time_slot" value="Monday 5:30 PM - 7:00 PM"
+                                            class="available">
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Friday</h5>
+                                <ul>
+                                    <li>
+                                        <label>11:00AM - 1:00PM</label>
+                                        <span class="seats">5/20 seats</span>
+                                        <input type="radio" name="time_slot" value="Friday 11:00AM - 1:00PM"
+                                            class="available">
+                                    </li>
+                                    <li>
+                                        <label>5:00 PM - 7:00 PM</label>
+                                        <span class="seats">4/20 seats</span>
+                                        <input type="radio" name="time_slot" value="Friday 5:00 PM - 7:00 PM"
+                                            class="available">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Hidden Field to Store the Class Name -->
+                        <input type="hidden" name="class_name" value="French Advanced">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                {% load static %}
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/spansih-beg.jpg' %}'); background-color: rgba(0, 0, 0, 0.4); background-blend-mode: overlay;">
+                        <h3>Spanish Beginner</h3>
+                        <br>
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Maria Gonzalez</p>
+                            <p><strong>Experience:</strong> 2 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Tuesday</h5>
+                                <ul>
+                                    <li>
+                                        <label>10:00AM - 12:00PM</label>
+                                        <span class="seats">Fully Booked</span>
+                                        <input type="radio" name="time_slot" class="disabled" disabled>
+                                    </li>
+                                    <li>
+                                        <label> 3:00 PM - 5:00 PM</label>
+                                        <span class="seats">14/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Tuesday 10:00AM - 12:00PM ">
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Saturday</h5>
+                                <ul>
+                                    <li>
+                                        <label>11:00AM - 1:00PM</label>
+                                        <span class="seats">11/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Saturday 11:00AM - 1:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 5:00 PM - 7:00 PM</label>
+                                        <span class="seats">13/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Saturday 5:00 PM - 7:00 PM">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name="class_name" value="Spanish Beginners">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/spansih-ad.jpg' %}'); background-color: rgba(0, 0, 0, 0.2); background-blend-mode: overlay;">
+                        <h3>Spanish Advanced</h3>
+                        <br>
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Señorita Castillo</p>
+                            <p><strong>Experience:</strong> 4 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Wednesday</h5>
+                                <ul>
+                                    <li>
+                                        <label>12:00AM - 1:30PM</label>
+                                        <span class="seats">3/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Wednesday 12:00AM - 1:30PM ">
+                                    </li>
+                                    <li>
+                                        <label> 5:00 PM - 6:30 PM</label>
+                                        <span class="seats">17/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Wednesday 5:00 PM - 6:30 PM">
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Friday</h5>
+                                <ul>
+                                    <li>
+                                        <label>11:30AM - 1:00PM</label>
+                                        <span class="seats">12/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Friday 11:30AM - 1:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 4:00 PM - 5:30 PM</label>
+                                        <span class="seats">8/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Friday 4:00 PM - 5:30 PM">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name="class_name" value="Spanish Advanced">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/japan_beg.jpg' %}' );background-color: rgba(0, 0, 0, 0.5); background-blend-mode: overlay;">
+                        <h3>Japanense Beginner</h3>
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Sensei Nakamura</p>
+                            <p><strong>Experience:</strong> 1 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Thrusday</h5>
+                                <ul>
+                                    <li>
+                                        <label>1:00PM - 3:00PM</label>
+                                        <span class="seats">2/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Thrusday 1:00PM - 3:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 5:00 PM - 7:00 PM</label>
+                                        <span class="seats">18/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Thursday 5:00 PM - 7:00 PM">
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Friday</h5>
+                                <ul>
+
+                                    <li>
+                                        <label> 2:00 PM - 4:00 PM</label>
+                                        <span class="seats">8/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Friday 2:00 PM - 4:00 PM">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <br>
+
+                        <input type="hidden" name="class_name" value="Japanense Beginners">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/japan_ad.jpg' %}' );background-color: rgba(0, 0, 0, 0.5); background-blend-mode: overlay;">
+                        <h3>Japanense Advanced</h3>
+
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Akira Yamamoto</p>
+                            <p><strong>Experience:</strong> 1.5 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Tuesday</h5>
+                                <ul>
+                                    <li>
+                                        <label>9:30AM - 11:00PM</label>
+                                        <span class="seats">17/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Tuesday 9:30AM - 11:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 2:30 PM - 4:00 PM</label>
+                                        <span class="seats">9/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Tuesday 2:30 PM - 4:00 PM">
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Thrusday</h5>
+                                <ul>
+                                    <li>
+                                        <label>12:00AM - 1:30PM</label>
+                                        <span class="seats">Fully Booked</span>
+                                        <input type="radio" name="time_slot" class="disabled" disabled>
+                                    </li>
+                                    <li>
+                                        <label> 5:30 PM - 7:00 PM</label>
+                                        <span class="seats">13/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Thrusday  5:30 PM - 7:00 PM">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name="class_name" value="Japanense Advanced">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/eng.jpg' %}');background-color: rgba(0, 0, 0, 0.6); background-blend-mode: overlay;">
+                        <h3>English</h3>
+                        <br>
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Johnsin Smithsen</p>
+                            <p><strong>Experience:</strong> 7 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Wednesday</h5>
+                                <ul>
+                                    <li>
+                                        <label>11:00AM - 1:00PM</label>
+                                        <span class="seats">6/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Wednesday 11:00AM - 1:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 4:00 PM - 6:00 PM</label>
+                                        <span class="seats">16/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value=" Wednesday 4:00 PM - 6:00 PM">
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Saturday</h5>
+                                <ul>
+                                    <li>
+                                        <label>12:00AM - 1:00PM</label>
+                                        <span class="seats">15/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Saturday 12:00AM - 1:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 5:00 PM - 6:00 PM</label>
+                                        <span class="seats">18/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Saturday  5:00 PM - 6:00 PM">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name="class_name" value="English">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'Bookclass' %}">
+                {% csrf_token %}
+                <div class="class-card">
+                    <div class="class-info"
+                        style="background-image: url('{% static 'img/hindilog.jpg' %}');background-color: rgba(0, 0, 0, 0.7); background-blend-mode: overlay;">
+                        <h3>Hindi</h3>
+                        <br>
+                        <div class="teacher-info">
+                            <p><strong>Teacher:</strong> Sushma Srivastava</p>
+                            <p><strong>Experience:</strong> 6 Years</p>
+                        </div>
+                    </div>
+                    <div class="class-booking">
+                        <h4>Select a Time Slot</h4>
+                        <div class="slots-container">
+                            <div class="slot-day">
+                                <h5>Monday</h5>
+                                <ul>
+                                    <li>
+                                        <label>12:00PM - 2:00PM</label>
+                                        <span class="seats">6/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Monday 12:00PM - 2:00PM">
+                                    </li>
+                                    <li>
+                                        <label>4:00 PM - 6:00 PM</label>
+                                        <span class="seats">Fully Booked</span>
+                                        <input type="radio" name="time_slot" class="disabled" disabled>
+
+                                    </li>
+                                </ul>
+                                <br>
+                                <h5>Friday</h5>
+                                <ul>
+                                    <li>
+                                        <label>9:00AM - 12:00PM</label>
+                                        <span class="seats">4/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="Friday 9:00AM - 12:00PM">
+                                    </li>
+                                    <li>
+                                        <label> 3:00 PM - 6:00 PM</label>
+                                        <span class="seats">8/20 seats</span>
+                                        <input type="radio" name="time_slot" class="available"
+                                            value="3:00 PM - 6:00 PM">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <input type="hidden" name="class_name" value="Hindi">
+
+                        <!-- Book Now button to submit the form -->
+                        <button type="submit" class="book-button">Book Now</button>
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <!-- Past Classes Section -->
+    <div class="class-section past-classes">
+        <h2>Past Classes</h2>
+        <div class="class-container">
+            <!-- Class Card 2 -->
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image2.jpg');">
+                    <h3>Spanish Intermediate</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Jane Smith</p>
+                        <p><strong>Experience:</strong> 7 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: November 29, 2024</p>
+                    <br>
+                    <p>Seats: 100/100 (Fully Booked)</p>
+                </div>
+            </div>
+
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image3.jpg');">
+                    <h3>French Grammer Skill</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Marie Dupont</p>
+                        <p><strong>Experience:</strong> 10 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: December 4, 2024</p>
+                    <br>
+                    <p>Seats: 69/70</p>
+                </div>
+            </div>
+
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image4.jpg');">
+                    <h3>Japanese Beginners</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Hiroshi Tanaka</p>
+                        <p><strong>Experience:</strong> 5 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: November 27, 2024</p>
+                    <br>
+                    <p>Seats:40/40 (Fully Booked)</p>
+                </div>
+            </div>
+
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image5.jpg');">
+                    <h3>Japanense Conversational</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Klaus Müller</p>
+                        <p><strong>Experience:</strong> 6 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: November 30, 2024</p>
+                    <br>
+                    <p>Seats: 60/60 (Fully Booked)</p>
+                </div>
+            </div>
+
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image6.jpg');">
+                    <h3>Hindi Grammer Basics</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Hema Shrini</p>
+                        <p><strong>Experience:</strong> 3.5 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: December 3, 2024</p>
+                    <br>
+                    <p>Seats: 47/50</p>
+                </div>
+            </div>
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image7.jpg');">
+                    <h3>Spanish Conversation </h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Carlos Gomez</p>
+                        <p><strong>Experience:</strong> 6 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: December 5, 2024</p>
+                    <br>
+                    <p>Seats: 80/80 (Fully Booked)</p>
+                </div>
+            </div>
+
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image8.jpg');">
+                    <h3>French Grammar Essentials</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Amélie Dubois</p>
+                        <p><strong>Experience:</strong> 2 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: November 25, 2024</p>
+                    <br>
+                    <p>Seats: 55/55 (Fully Booked)</p>
+                </div>
+            </div>
+
+            <div class="class-card">
+                <div class="class-info" style="background-image: url('class-image9.jpg');">
+                    <h3>Hindi Advanced Literature</h3>
+                    <div class="teacher-info">
+                        <p><strong>Teacher:</strong> Aarti Sharma</p>
+                        <p><strong>Experience:</strong> 12 Years</p>
+                    </div>
+                </div>
+                <div class="class-booking">
+                    <h4>Class Completed</h4>
+                    <p>Class held on: December 2, 2024</p>
+                    <br>
+                    <p>Seats: 50/50 (Fully Booked)</p>
+                </div>
+            </div>
+
+
+            <!-- Repeat for other past classes -->
+        </div>
+    </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+</html>

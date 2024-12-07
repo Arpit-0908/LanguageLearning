@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - German Material {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+
+</head>
+{% block body %}
+<header>
+    <div class="header-container">
+        <h1>Learn About Different Languages</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'German' %}">German</a></li>
+                <li><a href="{% url 'japan' %}">Japanese</a></li>
+                <li><a href="{% url 'Hindi' %}">Hindi</a></li>
+                <li><a href="{% url 'French' %}">French</a></li>
+                <li><a href="{% url 'Spanish' %}">Spanish</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- German Section -->
+<section id="german" class="language-section">
+    <h2>German</h2>
+    <div class="language-content">
+        <div class="language-image">
+            {% load static %}
+            <img src="{% static 'images/german.jpg' %}" alt="German Culture" />
+        </div>
+
+        <h3>Introduction</h3>
+        <p>German is a West Germanic language spoken primarily in Germany, Austria, Switzerland, and parts of Belgium and Luxembourg. It is the most widely spoken native language in Europe and has a rich literary and cultural heritage. German is known for its precision and structure, with many compound words and a complex system of grammar, including cases and gendered nouns. It is an official language of the European Union and is also used in scientific and academic contexts.</p>
+
+        <h3>Common Phrases</h3>
+        <ul>
+            <li><strong>Hello:</strong> Hallo</li>
+            <li><strong>Good morning:</strong> Guten Morgen</li>
+            <li><strong>Thank you:</strong> Danke</li>
+            <li><strong>Goodbye:</strong> Auf Wiedersehen</li>
+            <li><strong>Yes:</strong> Ja</li>
+            <li><strong>No:</strong> Nein</li>
+            <li><strong>Excuse me / I'm sorry:</strong> Entschuldigung</li>
+            <li><strong>How are you?</strong> Wie geht's dir?</li>
+            <li><strong>Good evening:</strong> Guten Abend</li>
+            <li><strong>Good night:</strong> Gute Nacht</li>
+            <li><strong>I'm fine, thank you:</strong> Mir geht's gut, danke</li>
+            <li><strong>What is your name?</strong> Wie heißt du?</li>
+            <li><strong>My name is...</strong> Mein Name ist...</li>
+            <li><strong>Where is the bathroom?</strong> Wo ist die Toilette?</li>
+            <li><strong>I don't understand:</strong> Ich verstehe nicht</li>
+            <li><strong>Can you speak English?</strong> Sprechen Sie Englisch?</li>
+            <li><strong>Please:</strong> Bitte</li>
+            <li><strong>Sorry for the wait:</strong> Entschuldigung für das Warten</li>
+            <li><strong>I am lost:</strong> Ich habe mich verirrt</li>
+            <li><strong>Help:</strong> Hilfe</li>
+            <li><strong>How much is this?</strong> Wie viel kostet das?</li>
+            <li><strong>Delicious:</strong> Lecker</li>
+            <li><strong>It’s okay / No problem:</strong> Es ist okay</li>
+        </ul>
+        <br>
+        <h3>Cultural Facts</h3>
+        <ul>
+            <li>German is known for its significant contribution to philosophy, literature, and music, with famous figures such as Goethe, Kant, Beethoven, and Bach.</li>
+            <li>Germany is famous for its beer culture, with over 1,300 breweries, and the Oktoberfest in Munich is one of the largest beer festivals in the world.</li>
+            <li>The German language is the most widely spoken language in Europe and is the official language of several countries, including Germany, Austria, and Switzerland.</li>
+            <li>Germany is home to some of the world's most prestigious universities, making it an important destination for higher education.</li>
+            <li>The German autobahn is famous for having stretches with no speed limits, making it a symbol of freedom and efficiency in transportation.</li>
+        </ul>
+        <br><br>
+        <h3>Language Structure</h3>
+        <p>German has a subject-verb-object (SVO) sentence structure, but it also uses different word orders depending on the sentence type. For example:</p>
+        <p><em>Ich spreche Deutsch.</em> (I speak German.)</p>
+        <p>German grammar includes cases (nominative, accusative, dative, genitive) that affect the articles and noun endings, and nouns are gendered (masculine, feminine, neuter).</p>
+        <br><br>
+        <div class="image">
+            {% load static %}
+            <img src="{% static 'images/fun.png' %}" alt="German Culture" />
+        </div>
+        <h3>Fun Facts About German Language</h3>
+        <ul>
+            <li>German is known for its compound words, which can be very long and descriptive (e.g., "Donaudampfschiffahrtsgesellschaftskapitän" - Danube steamship company captain).</li>
+            <li>The German language has three genders for nouns: masculine, feminine, and neuter.</li>
+            <li>German is a language that loves to make new words by combining existing ones, which can result in long but specific terms.</li>
+        </ul>
+        <br><br>
+        <h3>Learning Tips for German</h3>
+        <ul>
+            <li><strong>Practice your pronunciation:</strong> German has many distinct sounds, so practicing with native speakers is essential to getting the pronunciation right.</li>
+            <li><strong>Focus on grammar:</strong> German grammar can be challenging, especially with the use of cases and genders. Try to learn the rules step by step.</li>
+            <li><strong>Immerse yourself:</strong> Watch German movies, listen to German music, and read German books to get familiar with the language.</li>
+            <li><strong>Use language learning apps:</strong> Duolingo, Memrise, and Babbel are useful for building your vocabulary and understanding basic grammar.</li>
+        </ul>
+        <br><br>
+        <!-- Display Download Link for German PDF -->
+        <h3>Download Materials</h3>
+        <ul id="german-pdf-links">
+            <li><a href="{% static 'Documents/Basic german.pdf' %}" download>Download Basic German grammar PDF</a></li>
+            <li><a href="{% static 'Documents/fastgerman.pdf' %}" download>Download German Fast and Fun PDF</a></li>
+        </ul>
+    </div>
+</section>
+
+<style>
+    /* General Page Styling */
+    .image {
+        display: flex;
+        justify-content: center;
+        /* Centers the image horizontally */
+        align-items: center;
+        /* Centers the image vertically */
+        height: 100%;
+        /* Ensure the parent div has height to center vertically */
+    }
+
+    .image img {
+        width: 100%;
+        /* Makes the image responsive to the container's width */
+        max-width: 300px;
+        /* Limits the maximum width to 300px */
+        height: auto;
+        /* Maintains the aspect ratio */
+        border-radius: 8px;
+        /* Optional: Adds rounded corners to the image */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Optional: Adds a soft shadow to the image */
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #504b2c;
+        padding: 20px 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+        margin: 0;
+        font-size: 2.5em;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #f39c12;
+    }
+
+    main {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Language Section */
+    .language-section {
+        background-color: #ffffff;
+        margin: 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .language-section:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .language-section h2 {
+        text-align: center;
+        font-size: 2.5em;
+        color: #333;
+    }
+
+    .language-content h3 {
+        font-size: 1.6em;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .language-content p,
+    .language-content ul {
+        font-size: 1.2em;
+        line-height: 1.8;
+        color: #666;
+    }
+
+    .language-content ul {
+        list-style-type: square;
+        margin-left: 30px;
+    }
+
+    .language-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+    }
+
+    .language-image img {
+        width: 85%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .language-image img:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+</html>

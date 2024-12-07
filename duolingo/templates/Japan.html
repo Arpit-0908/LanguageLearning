@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Japanense Material {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+
+</head>
+{% block body %}
+<header>
+    <div class="header-container">
+        <h1>Learn About Different Languages</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'japan' %}">Japanese</a></li>
+                <li><a href="{% url 'German' %}">German</a></li>
+                <li><a href="{% url 'French' %}">French</a></li>
+                <li><a href="{% url 'Spanish' %}">Spanish</a></li>
+                <li><a href="{% url 'Hindi' %}">Hindi</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- Japanese Section -->
+<section id="japanese" class="language-section">
+    <h2>Japanese</h2>
+    <div class="language-content">
+        <div class="language-image">
+            {% load static %}
+
+            <img src="{% static 'img/japan_beg.jpg' %}" alt="Japanese Culture" />
+
+        </div>
+
+        <h3>Introduction</h3>
+        <p>Japanese is an East Asian language spoken by over 125 million people, primarily in Japan. It is part of the
+            Japonic language family, with a unique system of writing that incorporates three scripts: Kanji (logographic
+            characters), Hiragana (syllabic script), and Katakana (used mainly for foreign words). The language has been
+            influenced by Chinese, Portuguese, and English over the centuries. Japanese is known for its polite forms
+            and cultural emphasis on honorifics and respect.</p>
+
+        <h3>Common Phrases</h3>
+        <ul>
+            <li><strong>Hello:</strong> こんにちは (Konnichiwa)</li>
+            <li><strong>Good morning:</strong> おはようございます (Ohayou gozaimasu)</li>
+            <li><strong>Thank you:</strong> ありがとう (Arigato)</li>
+            <li><strong>Goodbye:</strong> さようなら (Sayonara)</li>
+            <li><strong>Yes:</strong> はい (Hai)</li>
+            <li><strong>No:</strong> いいえ (Iie)</li>
+            <li><strong>Excuse me / I'm sorry:</strong> すみません (Sumimasen)</li>
+            <li><strong>How are you?</strong> お元気ですか? (Ogenki desu ka?)</li>
+            <li><strong>Good evening:</strong> こんばんは (Konbanwa)</li>
+            <li><strong>Good night:</strong> おやすみなさい (Oyasuminasai)</li>
+            <li><strong>I'm fine, thank you:</strong> 元気です、ありがとう (Genki desu, arigato)</li>
+            <li><strong>What is your name?</strong> お名前は何ですか? (Onamae wa nan desu ka?)</li>
+            <li><strong>My name is...</strong> 私の名前は... (Watashi no namae wa...)</li>
+            <li><strong>Where is the bathroom?</strong> トイレはどこですか? (Toire wa doko desu ka?)</li>
+            <li><strong>I don't understand:</strong> わかりません (Wakarimasen)</li>
+            <li><strong>Can you speak English?</strong> 英語を話せますか? (Eigo o hanasemasu ka?)</li>
+            <li><strong>Please:</strong> お願いします (Onegaishimasu)</li>
+            <li><strong>Sorry for the wait:</strong> お待たせしました (Omataseshimashita)</li>
+            <li><strong>I am lost:</strong> 道に迷いました (Michi ni mayoimashita)</li>
+            <li><strong>Help:</strong> 助けてください (Tasukete kudasai)</li>
+            <li><strong>How much is this?</strong> これはいくらですか? (Kore wa ikura desu ka?)</li>
+            <li><strong>Delicious:</strong> おいしい (Oishii)</li>
+            <li><strong>It’s okay / No problem:</strong> 大丈夫です (Daijoubu desu)</li>
+
+        </ul>
+        <br>
+        <h3>Cultural Facts</h3>
+        <ul>
+            <li>The Japanese writing system is one of the most complex in the world, with Kanji characters borrowed from
+                Chinese.</li>
+            <li>Japanese culture places a high value on respect, politeness, and social harmony, which are reflected in
+                the language's honorifics and formal speech levels.</li>
+            <li>Japan is home to beautiful landscapes, from tranquil gardens and temples to stunning natural wonders
+                like Mount Fuji.</li>
+            <li>Traditional tea ceremonies and practices like calligraphy (shodo) and flower arranging (ikebana) are
+                highly respected in Japan.</li>
+            <li>Popular Japanese cultural exports include anime, manga, traditional arts, and cuisines like sushi,
+                ramen, and tempura.</li>
+        </ul>
+        <br><br>
+        <h3>Language Structure</h3>
+        <p>Japanese has a subject-object-verb (SOV) sentence structure, meaning that the verb typically comes at the end
+            of the sentence. For example:</p>
+        <p><em>私は日本語を勉強しています。</em> (Watashi wa nihongo o benkyou shiteimasu) – I am studying Japanese.</p>
+        <p>The language also has complex honorifics and verb forms to show respect depending on the social context and
+            relationships between speakers.</p>
+        <br><br>
+        <div class="image">
+            {% load static %}
+
+            <img src="{% static 'images/fun.png' %}" alt="Spanish Culture" />
+
+        </div>
+        <h3>Fun Facts About Japanese Language</h3>
+        <ul>
+            <li>Japanese has no equivalent to the word "yes" or "no" as it is understood in English. Instead, the
+                language uses different forms of agreement or disagreement based on context.</li>
+            <li>There are many onomatopoeic words in Japanese, which describe sounds and feelings. These words are used
+                often in daily conversation and even in manga and anime.</li>
+            <li>Japanese uses a system of counters when counting things, and the counter changes based on the type of
+                object being counted. For example, the counter for books is "冊" (satsu), while the counter for people is
+                "人" (nin).</li>
+        </ul>
+        <br><br>
+        <h3>Learning Tips for Japanese</h3>
+        <ul>
+            <li><strong>Start with Hiragana and Katakana:</strong> Mastering these two scripts will allow you to read
+                most Japanese texts and understand basic vocabulary.</li>
+            <li><strong>Practice speaking with native speakers:</strong> Immersion and communication are key to becoming
+                fluent.</li>
+            <li><strong>Learn Kanji gradually:</strong> Kanji can be overwhelming, so start with the most commonly used
+                ones and gradually build your knowledge.</li>
+            <li><strong>Use apps and resources:</strong> Utilize language learning apps like Duolingo, Anki, or Memrise
+                to reinforce vocabulary and kanji.</li>
+        </ul>
+        <br><br>
+        <!-- Display Download Link for Japanese PDF -->
+        <h3>Download Materials</h3>
+        <ul id="japanese-pdf-links">
+            <li><a href="{% static 'Documents/basicjapan.pdf' %}" download>Download Basic Japanese Book PDF</a></li>
+            <li><a href="{% static 'Documents/dicjapan.pdf' %}" download>Download Bilingual Japanese Dictionary PDF</a></li>
+        </ul>
+    </div>
+</section>
+
+<style>
+    /* General Page Styling */
+
+    .image {
+        display: flex;
+        justify-content: center;
+        /* Centers the image horizontally */
+        align-items: center;
+        /* Centers the image vertically */
+        height: 100%;
+        /* Ensure the parent div has height to center vertically */
+    }
+
+    .image img {
+        width: 100%;
+        /* Makes the image responsive to the container's width */
+        max-width: 300px;
+        /* Limits the maximum width to 300px */
+        height: auto;
+        /* Maintains the aspect ratio */
+        border-radius: 8px;
+        /* Optional: Adds rounded corners to the image */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Optional: Adds a soft shadow to the image */
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #504b2c;
+        padding: 20px 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+        margin: 0;
+        font-size: 2.5em;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #f39c12;
+    }
+
+    main {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Language Section */
+    .language-section {
+        background-color: #ffffff;
+        margin: 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .language-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .language-section h2 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+    }
+
+    .language-content h3 {
+        color: #34495e;
+        margin-top: 15px;
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+
+    .language-content ul {
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+
+    .language-content ul li {
+        margin: 8px 0;
+        font-size: 1.1em;
+    }
+
+    .language-content ul li strong {
+        color: #2c3e50;
+    }
+
+    /* Image Section Styling */
+    .language-image {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .language-image img {
+        width: 85%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .language-image img:hover {
+        transform: scale(1.05);
+    }
+
+    /* Download Links Styling */
+    #japanese-pdf-links li a {
+        text-decoration: none;
+        color: #2980b9;
+        font-weight: 500;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    #japanese-pdf-links li a:hover {
+        color: #2c3e50;
+    }
+
+    /* Footer Styling */
+    footer {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 15px 0;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        font-size: 1.1em;
+    }
+
+    footer a {
+        color: #f39c12;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    footer a:hover {
+        color: white;
+    }
+</style>
+
+{% endblock %}
+
+</html>

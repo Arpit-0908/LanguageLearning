@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Log In - italki{% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/nav.png' %}"> <!-- Update the path as needed -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"> <!-- Link to the external CSS -->
+    <style>
+        body {
+            background-image: url('{% load static %}{% static "images/back1.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(255, 255, 255, 0.4);
+            background-blend-mode: overlay;
+            background-repeat: no-repeat;
+            color: #fff;
+            margin: 0; 
+        }
+    </style>
+    
+</head>
+<body>
+    
+    <style>
+        
+        .navbar {
+            background-image: url("{% static 'images/navimg.jpg' %}"); /* Background image */
+            background-color: rgba(255, 255, 255, 0.6);
+            background-repeat: repeat; /* Repeat the background image */
+            background-position: center; /* Position the image at the center */
+            background-blend-mode: overlay;
+            padding: 1rem;
+            height: 100px;
+            display: flex;
+            border-bottom: 1px solid #bdbdbd;
+            justify-content: space-between;
+            align-items: center;
+        }   
+.logo img {
+    height: 70px;
+    width: 120px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.nav ul {
+    display: flex; /* Arrange list items horizontally */
+    list-style: none; /* Remove default list styling */
+}
+
+.nav li {
+    margin-right: 25px; /* Space out the list items */
+}
+
+.nav a {
+    text-decoration: none; /* Remove underline */
+    color: #000000; /* Text color */
+    font-size: 1.1rem; /* Font size */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+    transition: color 0.3s; /* Smooth color transition */
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav a:hover {
+    color: #2a9d8f; /* Change color on hover */
+}
+
+    </style>
+    <div class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/main_logo.png' %}" alt="Logo"/> <!-- Update the path as needed -->
+        </div>
+        <div class="nav">
+            <ul>
+                <li><a href="{% url 'index' %}#teachers">Find a Teacher</a></li>
+                <li><a href="{% url 'chat' %}">Chat Box</a></li>
+                <li><a href="{% url 'index' %}#bt">Become A Teacher</a></li>
+                <li><a href="{% url 'login' %}">Log in</a></li>
+                <li><a href="{% url 'register' %}">Sign up</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <h2>Login to Platform</h2>
+        <br>
+    
+        <!-- Display form validation or login errors -->
+        {% if form.errors %}
+        <div class="error-message">
+            <p>There was a problem with your login:</p>
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    
+        <!-- Custom error message for user not found -->
+        {% if user_not_found %}
+        <div class="error-message">
+            <p style="color: red;">Error: The username does not exist.</p>
+        </div>
+        {% endif %}
+    
+        <form method="POST" action="{% url 'login' %}" id="loginForm" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                {{ form.username }} <!-- Render the username input field -->
+            </div>
+    
+            <div class="form-group">
+                <label for="password">Password:</label>
+                {{ form.password }} <!-- Render the password input field -->
+            </div>
+    
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+    
+            <!-- Placeholder for custom error messages -->
+            <p id="error-message" style="color:red;"></p>
+        </form>
+    
+        <!-- Link for users who forgot their password -->
+        <div class="forgot-password">
+            <a href="{% url 'password_reset' %}">Forgot your password?</a>
+            <br>
+            <br>
+            <a href="{% url 'register' %}">Don't Have Account, Sign Up</a> <!-- Update the link as needed -->
+        </div>
+    </div>
+    
+    <script>
+        function validateForm() {
+            return true;
+        }
+    </script>
+</body>
+</html>

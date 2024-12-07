@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+
+    <!-- Load Static Files in Django -->
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'img/paymentlogo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/Paymentcss.css' %}">
+</head>
+<style>
+    /* Custom button styling */
+    .custom-button {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #4CAF50;
+        /* Green background */
+        color: white;
+        /* White text */
+        text-align: center;
+        text-decoration: none;
+        /* Remove underline */
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        /* Smooth transition for hover effects */
+    }
+
+    /* Hover effect */
+    .custom-button:hover {
+        background-color: #45a049;
+        /* Darker green when hovered */
+        transform: translateY(-3px);
+        /* Slight lift effect */
+    }
+
+    /* Focus effect (for accessibility) */
+    .custom-button:focus {
+        outline: 3px solid #f0a500;
+        /* Orange outline when the button is focused */
+    }
+
+    /* Active state when clicked */
+    .custom-button:active {
+        background-color: #3e8e41;
+        /* Even darker green when the button is clicked */
+        transform: translateY(1px);
+        /* Slight "pressed" effect */
+    }
+</style>
+
+<body>
+    <div class="payment-container">
+        <h2>Select a Payment Method</h2>
+
+        <!-- Order Details Section -->
+        <div class="order-details"
+            style="background-image: url('{% static booking_details.image_url %}'); background-size: cover; background-position: center; background-color: rgba(0,0,0,0.6); background-blend-mode: overlay;">
+            <h3>Order Details</h3>
+            <br>
+            {% if booking_details %}
+            <p><strong>Class Name:</strong> {{ booking_details.class_name }}</p>
+            <p><strong>Teacher:</strong> {{ booking_details.teacher_name }}</p>
+            <p><strong>Time Slot:</strong> {{ booking_details.time_slot }}</p>
+            <p><strong>Price:</strong> ${{ booking_details.price }}</p>
+            <p><strong>Total Price:</strong> ${{ booking_details.total_price }}</p>
+            <br>
+
+
+            <br>
+            <a href="{% url 'Bookclass' %}" class="custom-button">Change Slot</a>
+            <div class="email-input-container">
+                <form id="email-form" action="{% url 'payment' %}" method="POST" onsubmit="submitEmail(event)">
+                    {% csrf_token %}
+                    <label for="email" class="email-label"><strong>Enter your email</strong></label>
+                    <br>
+                    <input type="email" id="email" class="email-input" name="email" required
+                        placeholder="Your email address">
+                    <button type="submit" class="confirm-button">Complete the Payment </button>
+                </form>
+            </div>
+
+
+            <div id="confirmation-popup" class="confirmation-popup" style="display: none;">
+                <div class="confirmation-popup-content">
+                    <span id="popup-close" class="popup-close">&times;</span>
+                    <p>Your email has been verified!</p>
+                </div>
+            </div>
+
+            {% else %}
+            <p>No booking details available.</p>
+            {% endif %}
+        </div>
+
+        <style>
+            /* Email input container styling */
+            .email-input-container {
+                width: 100%;
+                max-width: 500px;
+                margin: 2px auto;
+                padding: 10px;
+                text-align: center;
+            }
+
+            a {
+                text-decoration: none;
+                /* Removes underline from the link */
+            }
+
+            /* Label for the email input */
+            .email-label {
+                font-size: 16px;
+                margin-bottom: 0px;
+                display: block;
+            }
+
+            /* Email input field */
+            .email-input {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 14px;
+            }
+
+            /* Submit button styling */
+            /* Styling for the Complete Payment Button */
+            .confirm-button {
+                background-color: #4CAF50;
+                /* Green color for the button */
+                color: white;
+                /* Text color */
+                font-size: 16px;
+                /* Font size */
+                padding: 15px 30px;
+                /* Top & Bottom padding, Left & Right padding */
+                border: none;
+                /* Remove default border */
+                border-radius: 30px;
+                /* Rounded edges */
+                margin-top: 30px;
+                cursor: pointer;
+                /* Pointer cursor on hover */
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                /* Smooth transition effects */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                /* Subtle shadow for depth */
+                font-weight: bold;
+                /* Bold text */
+            }
+
+            /* Hover effect */
+            .confirm-button:hover {
+                background-color: #45a049;
+                /* Darker green on hover */
+                transform: translateY(-2px);
+                /* Slightly lifts the button */
+                box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+                /* Darker shadow on hover */
+            }
+
+            /* Active effect when button is clicked */
+            .confirm-button:active {
+                background-color: #388e3c;
+                /* Even darker green when clicked */
+                transform: translateY(2px);
+                /* Button sinks a little on click */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                /* Lighter shadow on click */
+            }
+
+            /* Focus effect for accessibility */
+            .confirm-button:focus {
+                outline: none;
+                /* Remove default focus outline */
+                box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5);
+                /* Green glow outline when focused */
+            }
+
+            /* Confirmation Popup styling */
+            .confirmation-popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                /* Semi-transparent background */
+                display: none;
+                /* Hidden by default */
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                /* Ensure the popup appears on top */
+            }
+
+            /* Popup content box */
+            .confirmation-popup-content {
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                text-align: center;
+                width: 300px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Close button in the popup */
+            .popup-close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 24px;
+                color: #333;
+                cursor: pointer;
+                background: none;
+                border: none;
+            }
+
+            .popup-close:hover {
+                color: red;
+            }
+
+            /* Popup text */
+            .confirmation-popup-content p {
+                font-size: 18px;
+                color: #333;
+            }
+        </style>
+
+
+
+        <!-- Your Available Balance Section -->
+        <div class="balance-section">
+            <h3>Your Available Balance</h3>
+            <input type="text" id="promo-code" placeholder="Enter Code" />
+            <button id="apply-code">Apply</button>
+        </div>
+
+        <!-- Another Payment Method Section -->
+        <form id="payment-options">
+            <h3>Another Payment Method</h3>
+
+            <!-- Credit/Debit Card -->
+            <div class="method">
+                <input type="radio" id="credit-debit" name="payment-method" value="card" />
+                <label for="credit-debit">
+                    Credit or Debit Card
+                    <br>
+                    <img src="{% static 'img/visa.png' %}" alt="Visa" />
+                    <img src="{% static 'img/master.png' %}" alt="MasterCard" />
+                    <img src="{% static 'img/amer.png' %}" alt="America" />
+                    <img src="{% static 'img/ru.png' %}" alt="Rupay" />
+                </label>
+            </div>
+
+            <!-- Net Banking -->
+            <div class="method">
+                <input type="radio" id="net-banking" name="payment-method" value="net-banking" />
+                <label for="net-banking">Net Banking</label>
+                <select id="net-banking-options">
+                    <option value="">Choose an Option</option>
+                    <option value="hdfc">HDFC Bank</option>
+                    <option value="icici">ICICI Bank</option>
+                    <option value="sbi">SBI</option>
+                    <option value="axis">Axis Bank</option>
+                </select>
+            </div>
+
+            <!-- UPI Payment -->
+            <div class="method">
+                <input type="radio" id="upi" name="payment-method" value="upi" />
+                <label for="upi">Other UPI Apps</label>
+            </div>
+        </form>
+
+        <!-- Dynamic Content Section -->
+        <div id="dynamic-content"></div>
+
+    </div>
+
+    <script>
+
+        const form = document.getElementById("payment-options");
+        const dynamicContent = document.getElementById("dynamic-content");
+        const confirmButton = document.getElementById("confirm-payment");
+        const netBankingDropdown = document.getElementById("net-banking-options");
+
+        // Listen for Payment Option Selection
+        form.addEventListener("change", () => {
+            const selectedMethod = form.querySelector("input[name='payment-method']:checked");
+
+            // Enable Net Banking Dropdown if Selected
+            if (selectedMethod && selectedMethod.value === "net-banking") {
+                netBankingDropdown.disabled = false;
+            } else {
+                netBankingDropdown.disabled = true;
+            }
+
+            // Display Dynamic Content
+            dynamicContent.style.display = "block";
+            dynamicContent.innerHTML = "";
+
+            if (selectedMethod && selectedMethod.value === "card") {
+                // Credit Card Details
+                dynamicContent.innerHTML = `
+                    <h3>Enter Card Details</h3>
+                    <label>Card Number</label>
+                    <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX" />
+                    <br><br>
+                    <label>Expiry Date</label>
+                    <input type="text" placeholder="MM/YY" />
+                    <br><br>
+                    <label>CVV</label>
+                    <input type="text" placeholder="123" />
+                `;
+            } else if (selectedMethod && selectedMethod.value === "upi") {
+                // UPI Payment Options
+                dynamicContent.innerHTML = `
+                <b>
+                    <h3>UPI Payment</h3>
+                    <label>Select Payment Option</label>
+                    <div>
+                        <br>
+                        <input type="radio" id="qr-option" name="upi-option" value="qr" />
+                        <label for="qr-option">Use QR Code</label>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="radio" id="upi-id-option" name="upi-option" value="upi-id" />
+
+                        <label for="upi-id-option">
+                            Enter UPI ID</label>
+                    </div>
+                    <div id="upi-dynamic-content"></div>
+                    <b>
+                `;
+
+                // Listen for UPI Sub-options
+                const upiOptions = document.getElementsByName("upi-option");
+                upiOptions.forEach((option) => {
+                    option.addEventListener("change", () => {
+                        const selectedUpiOption = document.querySelector("input[name='upi-option']:checked").value;
+                        const upiDynamicContent = document.getElementById("upi-dynamic-content");
+
+                        if (selectedUpiOption === "qr") {
+                            upiDynamicContent.innerHTML = `
+                                <button id="generate-qr" class="confirm-btn">Generate QR Code</button>
+                                <div id="qr-code" style="display: none; text-align: center; margin-top: 20px;">
+                                    <p>Scan the QR code to pay</p>
+                                    <img src="" id="qr-code-image" alt="QR Code" />
+                                    <p id="timer">Time remaining: 05:00</p>
+                                </div>
+                            `;
+                            document.getElementById("generate-qr").addEventListener("click", () => {
+                                const qrCodeImage = document.getElementById("qr-code-image");
+                                qrCodeImage.src = `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPoTMJd5mCT7bxNuXBywFtolYsO78plPPp6Q&s`;
+                                document.getElementById("qr-code").style.display = "block";
+                                startCountdown(300); // 5 minutes
+                            });
+                        } else if (selectedUpiOption === "upi-id") {
+                            upiDynamicContent.innerHTML = `
+                            <br><b>
+                                <label>Enter Your UPI ID</label>
+                                <input type="text" placeholder="example@bank" />
+                                <b>
+                            `;
+                        }
+                    });
+                });
+            }
+        });
+
+        // Countdown Timer for QR Code
+        function startCountdown(seconds) {
+            const timerElement = document.getElementById("timer");
+            const interval = setInterval(() => {
+                const minutes = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timerElement.textContent = `Time remaining: ${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+                seconds--;
+                if (seconds < 0) {
+                    clearInterval(interval);
+                    timerElement.textContent = "QR Code expired.";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+
+</html>

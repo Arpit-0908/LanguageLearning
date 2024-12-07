@@ -1,0 +1,193 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    color: #fff; /* Change text color to white for contrast */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Full height */
+}
+/* Navbar styles */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 1rem;
+    height: 100px;
+    display: flex;
+    border-bottom: 1px solid #bdbdbd;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Stick navbar to the top */
+    top: 0; /* Ensures it sticks to the top */
+    width: 100%; /* Full width */
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+
+.logo img {
+    height: 70px;
+    width: 120px;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav li {
+    margin-right: 25px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
+.nav a:hover {
+    color: #2a9d8f;
+}
+
+/* Register container styles */
+.register-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(98, 211, 49, 0.9); /* Dark overlay for better contrast */
+    padding: 40px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(255, 17, 17, 0.5); /* Shadow for depth */
+    margin-top: 50px; /* Adjust for navbar height */
+    width: 100%;
+    max-width: 400px; /* Limit form width */
+    margin-bottom: 50px;
+}
+
+h2 {
+    margin-bottom: 1rem;
+    color: #fff; /* White text for headings */
+}
+
+/* Dropdown Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Style for the select element */
+.form-group select {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the dropdown */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+    font-size: 16px; /* Font size */
+    transition: border-color 0.3s; /* Smooth border color change */
+}
+
+/* Change border color on focus */
+.form-group select:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Style for the label */
+.form-group label {
+    display: block; /* Make label a block element */
+    margin-bottom: 5px; /* Space between label and dropdown */
+    font-weight: bold; /* Bold font for the label */
+}
+
+/* Style for the error message */
+.error-message {
+    color: rgb(0, 0, 0); /* Error text color */
+    margin-top: 10px; /* Space above error message */
+    margin-bottom: 20px;
+}
+
+/* Add hover effect */
+.form-group select:hover {
+    border-color: #007bff; /* Change border color on hover */
+}
+
+/* Optional: Style for the dropdown arrow */
+.form-group select::-ms-expand {
+    display: none; /* Hide default dropdown arrow in IE */
+}
+
+/* Style for options (works in Firefox) */
+.form-group select option {
+    padding: 10px; /* Padding inside options */
+    background-color: #fff; /* Background color */
+    color: #333; /* Text color */
+}
+
+/* Style for selected option */
+.form-group select option:checked {
+    background-color: #007bff; /* Background color for selected option */
+    color: #fff; /* Text color for selected option */
+}
+
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #fff; /* White text for labels */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #2a9d8f;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #2a9d8f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #21867a;
+}
+
+.login-redirect {
+    margin-top: 1rem;
+    color: #fff; /* White text for redirect text */
+}
+a{
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,696 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Best Way To Learn{% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sty.css' %}">
+</head>
+{% block body %}
+
+<section class="hero"
+    style="position: relative; text-align: center; color: white; padding: 100px 20px; background: url('{% static 'images/mainpage.jpg' %}') no-repeat center center; background-size: cover;">
+    <!-- Overlay for Translucency -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5);"></div>
+
+    <!-- Content -->
+    <h1
+        style="position: relative; font-size: 3rem; font-weight: bold; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);">
+        Learn a New Language Today!
+    </h1>
+    <p
+        style="position: relative; font-size: 1.2rem; line-height: 1.6; margin-bottom: 30px; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);">
+        Join thousands of students and teachers in a community dedicated to language learning.
+    </p>
+    <a href="{% url 'Bookclass' %}" class="book-class-button">
+        Book a Class Today
+    </a>
+
+</section>
+<style>
+    .book-class-button {
+        position: relative;
+        background: #ff5722;
+        display: inline-block;
+        /* Ensures transform works */
+        color: white;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 25px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .book-class-button:hover {
+        background: #948306;
+        transform: scale(1.1);
+    }
+</style>
+
+
+<style>
+    /* Features Section Styles */
+    /* General Styles for the Feature Cards */
+    .feature {
+        padding: 2rem;
+        border-radius: 12px;
+        /* Rounded corners for a smooth effect */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        /* Soft shadow with depth */
+        background: #1e2a3a;
+        /* Dark blue background */
+        color: #fff;
+        /* White text color to contrast against the dark background */
+        transition: all 0.3s ease-in-out;
+        /* Smooth transition for all properties */
+        overflow: hidden;
+        /* Ensure text doesn't overflow */
+    }
+
+    /* Hover Effects */
+    .feature:hover {
+        transform: translateY(-10px);
+        /* Slight lift effect on hover */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        /* Deeper shadow on hover */
+        background: #007bff;
+        /* Change to blue on hover */
+        transition: all 0.3s ease-in-out;
+        /* Ensure smooth transition on hover */
+    }
+
+    /* Title Styling */
+    .feature h3 {
+        margin: 10px 0;
+        font-size: 1.8em;
+        color: #fff;
+        /* White color for the title */
+        transition: color 0.3s ease;
+        /* Smooth color transition */
+    }
+
+    .feature:hover h3 {
+        color: #ffdb58;
+        /* Change title color to yellow on hover */
+    }
+
+    /* Description Styling */
+    .feature p {
+        font-size: 1rem;
+        color: #f4f4f4;
+        /* Lighter text color */
+        text-align: center;
+        line-height: 1.6;
+        transition: color 0.3s ease;
+        /* Smooth color transition */
+    }
+
+    .feature:hover p {
+        color: #f1f1f1;
+        /* Slightly lighter text color on hover */
+    }
+
+    /* Glowing Effect on Hover */
+    .feature:hover {
+        box-shadow: 0 0 15px rgba(255, 223, 88, 0.8);
+        /* Glowing effect on hover */
+    }
+
+    /* Features Container and Layout */
+    .features {
+        padding: 50px 20px;
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 50px;
+    }
+
+    /* Features Heading */
+    .features h2 {
+        margin-top: 75px;
+        margin-bottom: 20px;
+        font-size: 2.5em;
+        color: #333;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .features h2:hover {
+        color: #007bff;
+        /* Blue color on hover for heading */
+    }
+
+    /* Teachers Section Styles */
+    .teachers {
+        padding: 60px 20px;
+        text-align: center;
+        background-color: #f4f6f9;
+        /* Light, neutral background */
+        transition: background-color 0.3s ease;
+    }
+
+    .teachers:hover {
+        background-color: #e2e8f0;
+        /* Slightly darker background on hover */
+    }
+
+    .teachers h2 {
+        margin-bottom: 40px;
+        font-size: 2.8em;
+        font-weight: 700;
+        color: #1a202c;
+        /* Darker, modern color */
+        letter-spacing: 1px;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .teachers h2:hover {
+        color: #4c51bf;
+        /* Softer purple for hover */
+    }
+
+    .teacher-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+    }
+
+    .teacher-card {
+        background: linear-gradient(145deg, #ffffff, #e0e7ff);
+        /* Soft gradient background */
+        padding: 35px;
+        border-radius: 20px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        /* Larger shadow for depth */
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+        position: relative;
+        text-align: left;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+        /* Subtle border for a clean look */
+        cursor: pointer;
+        /* Make sure it's clear it's interactive */
+        width: 300px;
+        /* Adjust the width as needed */
+    }
+
+    .teacher-card:hover {
+        transform: translate(-10px, -10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        /* More pronounced shadow */
+        background: linear-gradient(145deg, #e2e8ff, #efff75);
+        /* Slightly darker gradient on hover */
+    }
+
+    .teacher-card img {
+        width: 100%;
+        height: 270px;
+        border-radius: 15px;
+        object-fit: cover;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .teacher-card:hover img {
+        transform: scale(1.05);
+        /* Slight zoom effect on the image */
+        filter: brightness(0.85);
+        /* Dimming image on hover */
+    }
+
+    .teacher-card h3 {
+        margin: 20px 0 10px;
+        font-size: 2.2em;
+        /* Slightly larger font size */
+        color: #0088ff;
+        /* Purple color for names */
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    .teacher-card h3:hover {
+        color: #2b6cb0;
+        /* Darker shade of blue on hover */
+    }
+
+    .teacher-card h4 {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #555;
+        font-weight: 600;
+    }
+
+    .teacher-card p {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        color: #444;
+        margin-bottom: 20px;
+    }
+
+    /* Button Styles */
+    .cta-button {
+        background-color: #08f524;
+        /* Soft purple button color */
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 30px;
+        /* Rounded button shape */
+        display: inline-block;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+    .cta-button:hover {
+        background-color: #f70c0c;
+        /* Darker purple on hover */
+
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .cta-button:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* General Styling for Become a Teacher Section */
+    .become-teacher {
+        padding: 50px 20px;
+        background-color: #f4f7fb;
+        /* Light background color */
+        text-align: center;
+        color: #333;
+        /* Dark text for readability */
+    }
+
+    .become-teacher h2 {
+        font-size: 2.8em;
+        color: #2b3a42;
+        /* Darker heading color */
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .become-teacher h2:hover {
+        color: #007bff;
+        /* Hover effect for heading */
+    }
+
+    .become-teacher .intro {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 40px;
+        line-height: 1.5;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Styling for the rules container */
+    .rules {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Individual rule cards */
+    .rule {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        /* Soft shadow */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rule:hover {
+        transform: translateY(-10px);
+        /* Lift effect on hover */
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        /* More prominent shadow */
+    }
+
+    .rule h3 {
+        font-size: 1.6em;
+        color: #333;
+        margin-bottom: 10px;
+        transition: color 0.3s ease;
+    }
+
+    .rule:hover h3 {
+        color: #007bff;
+        /* Blue color on hover for titles */
+    }
+
+    .rule p {
+        font-size: 1em;
+        color: #555;
+        line-height: 1.6;
+        text-align: justify;
+        margin-bottom: 20px;
+    }
+
+    /* Responsive Design for Smaller Screens */
+    @media (max-width: 768px) {
+        .become-teacher h2 {
+            font-size: 2.2em;
+        }
+
+        .rules {
+            grid-template-columns: 1fr;
+        }
+
+        .become-teacher .intro {
+            font-size: 1.1em;
+            max-width: 95%;
+        }
+
+        .rule h3 {
+            font-size: 1.4em;
+        }
+
+        .rule p {
+            font-size: 0.95em;
+        }
+    }
+
+    /* FAQ Section Styles */
+    .faq-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-container h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.2em;
+        color: #2b2d42;
+        /* Deep blue for headings */
+        transition: color 0.3s ease;
+    }
+
+    .faq-container h2:hover {
+        color: #007bff;
+        /* Color change on hover */
+    }
+
+    .faq-card {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9ff;
+        /* Match teachers section background */
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        /* Subtle shadow for cards */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-card:hover {
+        transform: translateY(-5px);
+        /* Lift on hover */
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        /* Enhanced shadow */
+    }
+
+    .faq-card input[type="checkbox"] {
+        display: none;
+    }
+
+    .faq-question {
+        display: block;
+        padding: 20px;
+        font-size: 1.3em;
+        font-weight: bold;
+        cursor: pointer;
+        color: #2b2d42;
+        /* Modern text color */
+        background-color: #eaeaff;
+        /* Soft hoverable background */
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .faq-question:hover {
+        background-color: #dcdcff;
+        color: #0056b3;
+        /* Highlighted text color */
+    }
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 20px;
+        background-color: #ffffff;
+        transition: max-height 0.4s ease-in-out, padding 0.4s ease;
+    }
+
+    .faq-card input:checked~.faq-answer {
+        max-height: 150px;
+        /* Adjust based on your content */
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .faq-answer p {
+        font-size: 1.1rem;
+        color: #555;
+        /* Subtle text color */
+        line-height: 1.5;
+    }
+
+</style>
+
+<section class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="feature">
+        <h3>Expert Teachers</h3>
+        <p>Our teachers are certified and experienced in teaching languages online.</p>
+    </div>
+    <div class="feature">
+        <h3>Flexible Scheduling</h3>
+        <p>Choose your schedule and learn at your own pace.</p>
+    </div>
+    <div class="feature">
+        <h3>Community Support</h3>
+        <p>Join our community for tips, resources, and practice opportunities.</p>
+    </div>
+    <div class="feature">
+        <h3>Interactive Group Classes</h3>
+        <p>Join engaging group classes with expert teachers and learners from around the world. Collaborate,
+            practice, and grow together.</p>
+    </div>
+
+</section>
+
+<section class="teachers" id="teachers">
+    <h2>Meet Our Teachers</h2>
+    <div class="teacher-cards">
+        <div class="teacher-card">
+            <img src="{% static 'images/spanish_t.jpeg' %}" alt="Teacher 1">
+            <h3>Maria Gonzalez</h3>
+            <br>
+            <h4>Spanish Teacher</h4>
+
+            <p>Expert in conversational Spanish with 5 years of experience.</p>
+            <a href="#" class="cta-button">Book a Lesson</a>
+        </div>
+        <div class="teacher-card">
+            <img src="{% static 'images/eng_t.jpeg' %}" alt="Teacher 2">
+            <h3>Johnsin Smithsen</h3>
+            <br>
+            <h4>English Teacher</h4>
+            <p>Native English speaker with a passion for teaching, with commond on grammer</p>
+            <a href="#" class="cta-button">Book a Lesson</a>
+        </div>
+        <div class="teacher-card">
+            <img src="{% static 'images/jap_t.jpeg' %}" alt="Teacher 3">
+            <h3>Akira Yamamoto</h3>
+            <br>
+            <h4>Japanese Teacher</h4>
+            <p>Specialized in Japanese culture and language for beginners till extend levels.</p>
+            <a href="#" class="cta-button">Book a Lesson</a>
+        </div>
+        <div class="teacher-card">
+            <img src="{% static 'images/french-t.jpg' %}" alt="French Teacher">
+            <h3>Madame Rousseau</h3>
+            <br>
+            <h4>French Teacher</h4>
+            <p> specializes in French conversational skills, providing expert guidance to all levels.</p>
+            <a href="#" class="cta-button">Book a Lesson</a>
+        </div>
+        <div class="teacher-card">
+            <img src="{% static 'images/hindi.jpeg' %}" alt="Hindi Teacher">
+            <h3>Sushma Srivastava</h3>
+            <br>
+            <h4>Hindi Teacher</h4>
+            <p>Specialized in Hindi literature and conversational skills for all levels.</p>
+            <a href="#" class="cta-button">Book a Lesson</a>
+        </div>
+
+    </div>
+</section>
+<section class="become-teacher" id="bt">
+    <h2>How to Become a Teacher</h2>
+    <p class="intro">Join our community of educators and inspire the next generation of learners. Here's what you
+        need to become a teacher on our platform:</p>
+    <div class="rules">
+        <div class="rule">
+            <h3>1. Certification Requirement</h3>
+            <p>To apply, you must provide proof of certification or demonstrate extensive experience in the language
+                you wish to teach. Preference is given to certifications from accredited institutions or
+                well-regarded language programs.</p>
+        </div>
+        <div class="rule">
+            <h3>2. Teaching Experience</h3>
+            <p>Applicants should have at least 2 years of teaching experience, whether in-person or online. Previous
+                online teaching experience is a plus as it shows familiarity with virtual learning environments.</p>
+        </div>
+        <div class="rule">
+            <h3>3. Availability</h3>
+            <p>You must be available for at least 10 hours a week to conduct lessons and interact with students.
+                Flexibility in scheduling to cater to various time zones is highly recommended.</p>
+        </div>
+        <div class="rule">
+            <h3>4. Language Proficiency</h3>
+            <p>To ensure quality education, all prospective teachers must pass a proficiency exam in the language
+                they wish to teach. Native or near-native speakers are preferred for certain languages.</p>
+        </div>
+        <div class="rule">
+            <h3>5. Professional Conduct</h3>
+            <p>Teachers are expected to maintain a high level of professionalism and courtesy. This includes
+                providing timely feedback, maintaining respect during classes, and supporting students effectively.
+            </p>
+        </div>
+        <div class="rule">
+            <h3>6. Equipment Requirements</h3>
+            <p>You need a reliable computer, a high-speed internet connection, and appropriate audio/visual
+                equipment to provide seamless online lessons. A quiet, well-lit, and distraction-free environment is
+                also crucial.</p>
+        </div>
+    </div>
+</section>
+
+<div class="faq-container">
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq1">
+        <label for="faq1" class="faq-question">What is the certification requirement?</label>
+        <div class="faq-answer">
+            <p>All prospective teachers must provide proof of certification or extensive experience in the language
+                they wish to teach.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq2">
+        <label for="faq2" class="faq-question">How much teaching experience is required?</label>
+        <div class="faq-answer">
+            <p>Teachers should have a minimum of 2 years of teaching experience, either in person or online.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq3">
+        <label for="faq3" class="faq-question">What is the minimum availability required?</label>
+        <div class="faq-answer">
+            <p>Teachers must be available for a minimum of 10 hours per week to conduct classes and respond to
+                students.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq4">
+        <label for="faq4" class="faq-question">What language proficiency is required?</label>
+        <div class="faq-answer">
+            <p>Prospective teachers must pass a proficiency exam in the language they wish to teach, ensuring they
+                meet the platform's standards.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq5">
+        <label for="faq5" class="faq-question">How does the application process work?</label>
+        <div class="faq-answer">
+            <p>After submitting your application, you will go through an interview and teaching demonstration. The
+                platform will review your qualifications before approval.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq6">
+        <label for="faq6" class="faq-question">Is there a training period for new teachers?</label>
+        <div class="faq-answer">
+            <p>Yes, all new teachers must undergo a short training period to familiarize themselves with the
+                platform’s teaching methods and tools.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq7">
+        <label for="faq7" class="faq-question">What is the compensation structure for teachers?</label>
+        <div class="faq-answer">
+            <p>Teachers are compensated based on the number of hours taught, and the pay varies depending on
+                experience and certifications.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq8">
+        <label for="faq8" class="faq-question">Can I teach multiple languages on the platform?</label>
+        <div class="faq-answer">
+            <p>Yes, teachers who are proficient in multiple languages can apply to teach more than one language,
+                provided they meet the requirements for each.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq9">
+        <label for="faq9" class="faq-question">What kind of support is available for teachers?</label>
+        <div class="faq-answer">
+            <p>We offer ongoing support through teacher communities, professional development workshops, and a
+                dedicated support team for technical issues.</p>
+        </div>
+    </div>
+
+    <div class="faq-card">
+        <input type="checkbox" id="faq10">
+        <label for="faq10" class="faq-question">How do I get started with creating my first lesson plan?</label>
+        <div class="faq-answer">
+            <p>After completing your training, you will be guided on how to create and submit lesson plans. We also
+                provide templates to help you get started.</p>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+{% endblock %}
+
+
+</html>

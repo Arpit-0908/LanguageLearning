@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Hindi Material {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+
+</head>
+{% block body %}
+<header>
+    <div class="header-container">
+        <h1>Learn About Different Languages</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Hindi' %}">Hindi</a></li>
+                <li><a href="{% url 'German' %}">German</a></li>
+                <li><a href="{% url 'japan' %}">Japanese</a></li>
+
+                <li><a href="{% url 'French' %}">French</a></li>
+                <li><a href="{% url 'Spanish' %}">Spanish</a></li>
+
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- Hindi Section -->
+<section id="hindi" class="language-section">
+    <h2>Hindi</h2>
+    <div class="language-content">
+        <div class="language-image">
+            {% load static %}
+            <img src="{% static 'images/Hindicity.jpg' %}" alt="Hindi Culture" />
+        </div>
+
+        <h3>Introduction</h3>
+        <p>Hindi is an Indo-Aryan language spoken primarily in India and Nepal. It is one of the official languages of
+            India and is widely spoken in various regions across the country. Hindi is written in the Devanagari script
+            and has a rich literary tradition with roots in ancient Sanskrit. It is known for its flexibility and
+            adaptability, borrowing vocabulary from Sanskrit, Persian, Arabic, and English.</p>
+
+        <h3>Common Phrases</h3>
+        <ul>
+            <li><strong>Hello:</strong> नमस्ते (Namaste)</li>
+            <li><strong>Good morning:</strong> शुभ प्रभात (Shubh Prabhat)</li>
+            <li><strong>Thank you:</strong> धन्यवाद (Dhanyavaad)</li>
+            <li><strong>Goodbye:</strong> अलविदा (Alvida)</li>
+            <li><strong>Yes:</strong> हाँ (Haan)</li>
+            <li><strong>No:</strong> नहीं (Nahi)</li>
+            <li><strong>Excuse me / I'm sorry:</strong> माफ़ कीजिए (Maaf Kijiye)</li>
+            <li><strong>How are you?</strong> आप कैसे हैं? (Aap Kaise Hain?)</li>
+            <li><strong>Good evening:</strong> शुभ संध्या (Shubh Sandhya)</li>
+            <li><strong>Good night:</strong> शुभ रात्रि (Shubh Raatri)</li>
+            <li><strong>I'm fine, thank you:</strong> मैं ठीक हूँ, धन्यवाद (Main Theek Hoon, Dhanyavaad)</li>
+            <li><strong>What is your name?</strong> आपका नाम क्या है? (Aapka Naam Kya Hai?)</li>
+            <li><strong>My name is...</strong> मेरा नाम ... है (Mera Naam ... Hai)</li>
+            <li><strong>Where is the bathroom?</strong> बाथरूम कहाँ है? (Bathroom Kahan Hai?)</li>
+            <li><strong>I don't understand:</strong> मुझे समझ में नहीं आता (Mujhe Samajh Mein Nahi Aata)</li>
+            <li><strong>Can you speak English?</strong> क्या आप अंग्रेजी बोलते हैं? (Kya Aap Angrezi Bolte Hain?)</li>
+            <li><strong>Please:</strong> कृपया (Kripya)</li>
+            <li><strong>Sorry for the wait:</strong> इंतजार के लिए माफ़ करें (Intezaar Ke Liye Maaf Karein)</li>
+            <li><strong>I am lost:</strong> मैं खो गया हूँ (Main Kho Gaya Hoon)</li>
+            <li><strong>Help:</strong> मदद (Madad)</li>
+            <li><strong>How much is this?</strong> यह कितने का है? (Yeh Kitne Ka Hai?)</li>
+            <li><strong>Delicious:</strong> स्वादिष्ट (Swadisht)</li>
+            <li><strong>It’s okay / No problem:</strong> कोई बात नहीं (Koi Baat Nahi)</li>
+        </ul>
+        <br>
+        <h3>Cultural Facts</h3>
+        <ul>
+            <li>Hindi has a rich literary tradition with famous poets like Mirza Ghalib and Harivansh Rai Bachchan.</li>
+            <li>Bollywood, the Hindi-language film industry, is the largest in the world in terms of the number of films
+                produced.</li>
+            <li>The Hindi language is spoken by over 400 million people, making it one of the most spoken languages in
+                the world.</li>
+            <li>Hindi is an official language of India and is widely used in the media, education, and government.</li>
+            <li>Hindi has borrowed words from a wide range of languages including Persian, Arabic, and English, making
+                it rich in vocabulary.</li>
+        </ul>
+        <br><br>
+        <h3>Language Structure</h3>
+        <p>Hindi follows a subject-object-verb (SOV) sentence structure. It uses postpositions instead of prepositions
+            and has gendered nouns and verbs.</p>
+        <p><em>मैं हिंदी बोलता हूँ।</em> (Main Hindi Bolta Hoon. - I speak Hindi.)</p>
+        <br><br>
+        <div class="image">
+            {% load static %}
+            <img src="{% static 'images/fun.png' %}" alt="Hindi Culture" />
+        </div>
+        <h3>Fun Facts About Hindi Language</h3>
+        <ul>
+            <li>Hindi is the 4th most spoken language in the world.</li>
+            <li>Many words in Hindi have Persian and Arabic origins, especially in food, architecture, and culture.</li>
+            <li>Hindi is one of the 22 scheduled languages of India and is used in Indian government communication.</li>
+        </ul>
+        <br><br>
+        <h3>Learning Tips for Hindi</h3>
+        <ul>
+            <li><strong>Practice the script:</strong> Hindi is written in the Devanagari script, which can be
+                challenging at first. Regular practice will help you become proficient.</li>
+            <li><strong>Learn pronunciation:</strong> Hindi has a variety of unique sounds that require practice to
+                pronounce correctly, especially the retroflex consonants.</li>
+            <li><strong>Immerse yourself:</strong> Watching Bollywood movies and listening to Hindi music is a great way
+                to immerse yourself in the language.</li>
+            <li><strong>Use language learning apps:</strong> Duolingo, Memrise, and other language learning apps can
+                help you build vocabulary and practice grammar.</li>
+        </ul>
+        <br><br>
+        <!-- Display Download Link for Hindi PDF -->
+        <h3>Download Materials</h3>
+        <ul id="hindi-pdf-links">
+            <li><a href="{% static 'Documents/Alankar.pptx' %}" download>Download Last Class Hindi Notes</a></li>
+            <li><a href="{% static 'Documents/Kabirdas.pptx' %}" download>Download KabirDas Dohe</a></li>
+
+
+        </ul>
+    </div>
+</section>
+
+<style>
+    /* General Page Styling */
+    .image {
+        display: flex;
+        justify-content: center;
+        /* Centers the image horizontally */
+        align-items: center;
+        /* Centers the image vertically */
+        height: 100%;
+        /* Ensure the parent div has height to center vertically */
+    }
+
+    .image img {
+        width: 100%;
+        /* Makes the image responsive to the container's width */
+        max-width: 300px;
+        /* Limits the maximum width to 300px */
+        height: auto;
+        /* Maintains the aspect ratio */
+        border-radius: 8px;
+        /* Optional: Adds rounded corners to the image */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Optional: Adds a soft shadow to the image */
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #504b2c;
+        padding: 20px 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+        margin: 0;
+        font-size: 2.5em;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #f39c12;
+    }
+
+    main {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Language Section */
+    .language-section {
+        background-color: #ffffff;
+        margin: 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .language-section:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .language-section h2 {
+        text-align: center;
+        font-size: 2.5em;
+        color: #333;
+    }
+
+    .language-content h3 {
+        font-size: 1.6em;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .language-content p,
+    .language-content ul {
+        font-size: 1.2em;
+        line-height: 1.8;
+        color: #666;
+    }
+
+    .language-content ul {
+        list-style-type: square;
+        margin-left: 30px;
+    }
+
+    .language-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+    }
+
+    .language-image img {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .language-content a {
+        text-decoration: none;
+        color: #3498db;
+    }
+
+    .language-content a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+{% endblock %}

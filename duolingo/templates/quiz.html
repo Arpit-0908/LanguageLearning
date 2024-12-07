@@ -1,0 +1,611 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Quizs {% endblock %}</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+</head>
+{% block body %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #FFB6C1, #A2DFF7, #B8F2C7, #F5E1B2);
+        color: #333;
+    }
+
+    .container {
+        width: 80%;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+
+    .options {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .option-button {
+        padding: 15px 30px;
+        cursor: pointer;
+        border: 2px solid #B3B6B7;
+        border-radius: 8px;
+        font-weight: 700;
+        background-color: #F8F8F8;
+        font-size: 18px;
+        color: #4CAF50;
+        transition: background-color 0.3s, border 0.3s;
+    }
+
+    .option-button:hover {
+        background-color: #B8F2C7;
+        border-color: #4CAF50;
+    }
+
+    .option-button:active {
+        background-color: #A2DFF7;
+    }
+
+    .quiz-section {
+        display: none;
+        padding: 20px;
+        background-color: #F9F9F9;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 2px solid #B3B6B7;
+        margin-top: 20px;
+    }
+
+    .quiz-question {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #FFF;
+        border-radius: 8px;
+        border: 1px solid #B3B6B7;
+    }
+
+    .quiz-question p {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .quiz-question input[type="radio"] {
+        margin-right: 10px;
+    }
+
+    .quiz-question label {
+        font-size: 16px;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin-top: 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+    }
+
+    .correct {
+        background-color: #d1e7f7;
+        border: 1px solid green;
+        color: green;
+    }
+
+    .incorrect {
+        background-color: #fbd5d5;
+    }
+</style>
+<div class="container">
+    <h1>Language Learning Quiz</h1>
+
+    <!-- Language Options -->
+    <div class="options">
+        <button class="option-button" onclick="showQuiz('japanese')">Japanese</button>
+        <button class="option-button" onclick="showQuiz('german')">German</button>
+        <button class="option-button" onclick="showQuiz('spanish')">Spanish</button>
+        <button class="option-button" onclick="showQuiz('french')">French</button>
+    </div>
+
+    <!-- Japanese Quiz Section -->
+    <div class="quiz-section" id="japaneseQuiz">
+        <form id="japaneseQuizForm">
+            <div class="quiz-question">
+                <p>1. How do you say "Thank you" in Japanese?</p>
+                <label><input type="radio" name="japanese_q1" value="A"> A) Arigato</label><br>
+                <label><input type="radio" name="japanese_q1" value="B"> B) Konnichiwa</label><br>
+                <label><input type="radio" name="japanese_q1" value="C"> C) Sayonara</label><br>
+                <label><input type="radio" name="japanese_q1" value="D"> D) Ohayou</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What is the Japanese word for "Goodbye"?</p>
+                <label><input type="radio" name="japanese_q2" value="A"> A) Konnichiwa</label><br>
+                <label><input type="radio" name="japanese_q2" value="B"> B) Sayonara</label><br>
+                <label><input type="radio" name="japanese_q2" value="C"> C) Arigato</label><br>
+                <label><input type="radio" name="japanese_q2" value="D"> D) Sumimasen</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Which of these is a traditional Japanese food?</p>
+                <label><input type="radio" name="japanese_q3" value="A"> A) Sushi</label><br>
+                <label><input type="radio" name="japanese_q3" value="B"> B) Pizza</label><br>
+                <label><input type="radio" name="japanese_q3" value="C"> C) Taco</label><br>
+                <label><input type="radio" name="japanese_q3" value="D"> D) Hamburger</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. What is the Japanese word for "Hello"?</p>
+                <label><input type="radio" name="japanese_q4" value="A"> A) Konnichiwa</label><br>
+                <label><input type="radio" name="japanese_q4" value="B"> B) Ohayou</label><br>
+                <label><input type="radio" name="japanese_q4" value="C"> C) Sayonara</label><br>
+                <label><input type="radio" name="japanese_q4" value="D"> D) Sumimasen</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. Which script is primarily used in Japanese writing?</p>
+                <label><input type="radio" name="japanese_q5" value="A"> A) Kanji</label><br>
+                <label><input type="radio" name="japanese_q5" value="B"> B) Cyrillic</label><br>
+                <label><input type="radio" name="japanese_q5" value="C"> C) Latin</label><br>
+                <label><input type="radio" name="japanese_q5" value="D"> D) Arabic</label>
+            </div>
+            <!-- Question 6: Animal in Japanese -->
+            <div class="quiz-question">
+                <p>6. What is the name of this animal in Japanese?</p>
+                <img src="{% static 'Quiz/tiger.jpg' %}" alt="Tiger" class="quiz-image">
+                <label><input type="radio" name="japanese_q6" value="A"> A) 虎 (Tora)</label><br>
+                <label><input type="radio" name="japanese_q6" value="B"> B) 鳥 (Tori)</label><br>
+                <label><input type="radio" name="japanese_q6" value="C"> C) 犬 (Inu)</label><br>
+                <label><input type="radio" name="japanese_q6" value="D"> D) 猫 (Neko)</label>
+            </div>
+
+            <!-- Question 7: Food Item in Japanese -->
+            <div class="quiz-question">
+                <p>7. What is the name of this food in Japanese?</p>
+                <img src="{% static 'Quiz/ramen.jpg' %}" alt="Ramen" class="quiz-image">
+                <label><input type="radio" name="japanese_q7" value="A"> A) ラーメン (Rāmen)</label><br>
+                <label><input type="radio" name="japanese_q7" value="B"> B) 寿司 (Sushi)</label><br>
+                <label><input type="radio" name="japanese_q7" value="C"> C) ピザ (Piza)</label><br>
+                <label><input type="radio" name="japanese_q7" value="D"> D) ハンバーガー (Hanbāgā)</label>
+            </div>
+
+            <!-- Question 8: Clothing Item in Japanese -->
+            <div class="quiz-question">
+                <p>8. What is the name of this clothing item in Japanese?</p>
+                <img src="{% static 'Quiz/jacket.jpg' %}" alt="Jacket" class="quiz-image">
+                <label><input type="radio" name="japanese_q8" value="A"> A) ジャケット (Jaketto)</label><br>
+                <label><input type="radio" name="japanese_q8" value="B"> B) シャツ (Shatsu)</label><br>
+                <label><input type="radio" name="japanese_q8" value="C"> C) パンツ (Pantsu)</label><br>
+                <label><input type="radio" name="japanese_q8" value="D"> D) ドレス (Doresu)</label>
+            </div>
+
+            <!-- Question 9: Animal in Japanese -->
+            <div class="quiz-question">
+                <p>9. What is the name of this animal in Japanese?</p>
+                <img src="{% static 'Quiz/elephant.jpg' %}" alt="Elephant" class="quiz-image">
+                <label><input type="radio" name="japanese_q9" value="A"> A) 象 (Zou)</label><br>
+                <label><input type="radio" name="japanese_q9" value="B"> B) 牛 (Ushi)</label><br>
+                <label><input type="radio" name="japanese_q9" value="C"> C) 馬 (Uma)</label><br>
+                <label><input type="radio" name="japanese_q9" value="D"> D) 魚 (Sakana)</label>
+            </div>
+
+            <!-- Question 10: Food Item in Japanese -->
+            <div class="quiz-question">
+                <p>10. What is the name of this food item in Japanese?</p>
+                <img src="{% static 'Quiz/icecream.jpg' %}" alt="Ice Cream" class="quiz-image">
+                <label><input type="radio" name="japanese_q10" value="A"> A) アイスクリーム (Aisu Kurīmu)</label><br>
+                <label><input type="radio" name="japanese_q10" value="B"> B) ケーキ (Kēki)</label><br>
+                <label><input type="radio" name="japanese_q10" value="C"> C) チョコレート (Chokorēto)</label><br>
+                <label><input type="radio" name="japanese_q10" value="D"> D) クッキー (Kukkī)</label>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- German Quiz Section -->
+    <div class="quiz-section" id="germanQuiz">
+        <form id="germanQuizForm">
+            <div class="quiz-question">
+                <p>1. How do you say "Thank you" in German?</p>
+                <label><input type="radio" name="german_q1" value="A"> A) Danke</label><br>
+                <label><input type="radio" name="german_q1" value="B"> B) Bonjour</label><br>
+                <label><input type="radio" name="german_q1" value="C"> C) Gracias</label><br>
+                <label><input type="radio" name="german_q1" value="D"> D) Ciao</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What is the German word for "Goodbye"?</p>
+                <label><input type="radio" name="german_q2" value="A"> A) Tschüss</label><br>
+                <label><input type="radio" name="german_q2" value="B"> B) Sayonara</label><br>
+                <label><input type="radio" name="german_q2" value="C"> C) Adiós</label><br>
+                <label><input type="radio" name="german_q2" value="D"> D) Bonjour</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Which of these is a traditional German food?</p>
+                <label><input type="radio" name="german_q3" value="A"> A) Bratwurst</label><br>
+                <label><input type="radio" name="german_q3" value="B"> B) Sushi</label><br>
+                <label><input type="radio" name="german_q3" value="C"> C) Taco</label><br>
+                <label><input type="radio" name="german_q3" value="D"> D) Pizza</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. What is the German word for "Hello"?</p>
+                <label><input type="radio" name="german_q4" value="A"> A) Hallo</label><br>
+                <label><input type="radio" name="german_q4" value="B"> B) Bonjour</label><br>
+                <label><input type="radio" name="german_q4" value="C"> C) Hola</label><br>
+                <label><input type="radio" name="german_q4" value="D"> D) Ciao</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. Which script is primarily used in German writing?</p>
+                <label><input type="radio" name="german_q5" value="A"> A) Latin</label><br>
+                <label><input type="radio" name="german_q5" value="B"> B) Cyrillic</label><br>
+                <label><input type="radio" name="german_q5" value="C"> C) Kanji</label><br>
+                <label><input type="radio" name="german_q5" value="D"> D) Arabic</label>
+            </div>
+            <!-- Animal Question 6: -->
+            <div class="quiz-question">
+                <p>6. What is the name of this animal in German?</p>
+                <img src="{% static 'Quiz/dolphin.jpg' %}" alt="Dolphin" class="quiz-image">
+                <label><input type="radio" name="german_q6" value="A"> A) Delfin</label><br>
+                <label><input type="radio" name="german_q6" value="B"> B) Wal</label><br>
+                <label><input type="radio" name="german_q6" value="C"> C) Hai</label><br>
+                <label><input type="radio" name="german_q6" value="D"> D) Robbe</label>
+            </div>
+
+            <!-- Food Item Question 7: -->
+            <div class="quiz-question">
+                <p>7. What is the name of this food in German?</p>
+                <img src="{% static 'Quiz/pasta.jpg' %}" alt="Pasta" class="quiz-image">
+                <label><input type="radio" name="german_q7" value="A"> A) Pasta</label><br>
+                <label><input type="radio" name="german_q7" value="B"> B) Pizza</label><br>
+                <label><input type="radio" name="german_q7" value="C"> C) Burger</label><br>
+                <label><input type="radio" name="german_q7" value="D"> D) Sushi</label>
+            </div>
+
+            <!-- Clothing Item Question 8: -->
+            <div class="quiz-question">
+                <p>8. What is the name of this clothing item in German?</p>
+                <img src="{% static 'Quiz/hat.jpg' %}" alt="Hat" class="quiz-image">
+                <label><input type="radio" name="german_q8" value="A"> A) Hut</label><br>
+                <label><input type="radio" name="german_q8" value="B"> B) Jacke</label><br>
+                <label><input type="radio" name="german_q8" value="C"> C) Hemd</label><br>
+                <label><input type="radio" name="german_q8" value="D"> D) Hose</label>
+            </div>
+            <div class="quiz-question">
+                <p>9. What is the name of this food item in German?</p>
+                <img src="{% static 'Quiz/icecream.jpg' %}" alt="Ice Cream" class="quiz-image">
+                <label><input type="radio" name="german_q10" value="A"> A) Eiscreme</label><br>
+                <label><input type="radio" name="german_q10" value="B"> B) Kuchen</label><br>
+                <label><input type="radio" name="german_q10" value="C"> C) Schokolade</label><br>
+                <label><input type="radio" name="german_q10" value="D"> D) Keks</label>
+            </div>
+            <!-- Animal Question 9: -->
+            <div class="quiz-question">
+                <p>10. What is the name of this animal in German?</p>
+                <img src="{% static 'Quiz/elephant.jpg' %}" alt="Elephant" class="quiz-image">
+                <label><input type="radio" name="german_q9" value="A"> A) Elefant</label><br>
+                <label><input type="radio" name="german_q9" value="B"> B) Bär</label><br>
+                <label><input type="radio" name="german_q9" value="C"> C) Pferd</label><br>
+                <label><input type="radio" name="german_q9" value="D"> D) Fisch</label>
+            </div>
+
+            <!-- Food Item Question 10: -->
+
+
+        </form>
+    </div>
+
+    <!-- Spanish Quiz Section -->
+    <div class="quiz-section" id="spanishQuiz">
+        <form id="spanishQuizForm">
+            <div class="quiz-question">
+                <p>1. How do you say "Thank you" in Spanish?</p>
+                <label><input type="radio" name="spanish_q1" value="A"> A) Gracias</label><br>
+                <label><input type="radio" name="spanish_q1" value="B"> B) Danke</label><br>
+                <label><input type="radio" name="spanish_q1" value="C"> C) Arigato</label><br>
+                <label><input type="radio" name="spanish_q1" value="D"> D) Merci</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What is the Spanish word for "Goodbye"?</p>
+                <label><input type="radio" name="spanish_q2" value="A"> A) Adiós</label><br>
+                <label><input type="radio" name="spanish_q2" value="B"> B) Tschüss</label><br>
+                <label><input type="radio" name="spanish_q2" value="C"> C) Sayonara</label><br>
+                <label><input type="radio" name="spanish_q2" value="D"> D) Ciao</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Which of these is a traditional Spanish food?</p>
+                <label><input type="radio" name="spanish_q3" value="A"> A) Paella</label><br>
+                <label><input type="radio" name="spanish_q3" value="B"> B) Sushi</label><br>
+                <label><input type="radio" name="spanish_q3" value="C"> C) Hamburger</label><br>
+                <label><input type="radio" name="spanish_q3" value="D"> D) Pizza</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. What is the Spanish word for "Hello"?</p>
+                <label><input type="radio" name="spanish_q4" value="A"> A) Hola</label><br>
+                <label><input type="radio" name="spanish_q4" value="B"> B) Bonjour</label><br>
+                <label><input type="radio" name="spanish_q4" value="C"> C) Konnichiwa</label><br>
+                <label><input type="radio" name="spanish_q4" value="D"> D) Ciao</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. Which script is primarily used in Spanish writing?</p>
+                <label><input type="radio" name="spanish_q5" value="A"> A) Latin</label><br>
+                <label><input type="radio" name="spanish_q5" value="B"> B) Cyrillic</label><br>
+                <label><input type="radio" name="spanish_q5" value="C"> C) Kanji</label><br>
+                <label><input type="radio" name="spanish_q5" value="D"> D) Arabic</label>
+            </div>
+            <!-- Question 6: Bottle (Botella) -->
+            <div class="quiz-question">
+                <p>6. How do you say "bottle" in Spanish?</p>
+                <img src="{% static 'Quiz/bottle.jpg' %}" alt="Bottle" class="quiz-image">
+                <label><input type="radio" name="spanish_q6" value="A"> A) Botella</label><br>
+                <label><input type="radio" name="spanish_q6" value="B"> B) Vaso</label><br>
+                <label><input type="radio" name="spanish_q6" value="C"> C) Taza</label><br>
+                <label><input type="radio" name="spanish_q6" value="D"> D) Jarra</label>
+            </div>
+
+            <!-- Question 7: Dog (Perro) -->
+            <div class="quiz-question">
+                <p>7. How do you say "dog" in Spanish?</p>
+                <img src="{% static 'Quiz/dog.jpg' %}" alt="Dog" class="quiz-image">
+                <label><input type="radio" name="spanish_q7" value="A"> A) Perro</label><br>
+                <label><input type="radio" name="spanish_q7" value="B"> B) Gato</label><br>
+                <label><input type="radio" name="spanish_q7" value="C"> C) Pájaro</label><br>
+                <label><input type="radio" name="spanish_q7" value="D"> D) Conejo</label>
+            </div>
+
+            <!-- Question 8: House (Casa) -->
+            <div class="quiz-question">
+                <p>8. How do you say "house" in Spanish?</p>
+                <img src="{% static 'quiz/house.jpg' %}" alt="House" class="quiz-image">
+                <label><input type="radio" name="spanish_q8" value="A"> A) Casa</label><br>
+                <label><input type="radio" name="spanish_q8" value="B"> B) Piso</label><br>
+                <label><input type="radio" name="spanish_q8" value="C"> C) Edificio</label><br>
+                <label><input type="radio" name="spanish_q8" value="D"> D) Apartamento</label>
+            </div>
+
+            <!-- Question 9: Monument Name (Nombre de Monumento) -->
+            <div class="quiz-question">
+                <p>9. How do you say "Eiffel Tower" in Spanish?</p>
+                <img src="{% static 'Quiz/tower.jpg' %}" alt="Eiffel Tower" class="quiz-image">
+                <label><input type="radio" name="spanish_q9" value="A"> A) Torre Eiffel</label><br>
+                <label><input type="radio" name="spanish_q9" value="B"> B) Torre de Pisa</label><br>
+                <label><input type="radio" name="spanish_q9" value="C"> C) Big Ben</label><br>
+                <label><input type="radio" name="spanish_q9" value="D"> D) La Alhambra</label>
+            </div>
+
+            <!-- Question 10: Tree (Árbol) -->
+            <div class="quiz-question">
+                <p>10. How do you say "tree" in Spanish?</p>
+                <img src="{% static 'Quiz/tree.jpg' %}" alt="Tree" class="quiz-image">
+                <label><input type="radio" name="spanish_q10" value="A"> A) Árbol</label><br>
+                <label><input type="radio" name="spanish_q10" value="B"> B) Flor</label><br>
+                <label><input type="radio" name="spanish_q10" value="C"> C) Hoja</label><br>
+                <label><input type="radio" name="spanish_q10" value="D"> D) Planta</label>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- French Quiz Section -->
+    <div class="quiz-section" id="frenchQuiz">
+        <form id="frenchQuizForm">
+            <div class="quiz-question">
+                <p>1. How do you say "Thank you" in French?</p>
+                <label><input type="radio" name="french_q1" value="A"> A) Merci</label><br>
+                <label><input type="radio" name="french_q1" value="B"> B) Danke</label><br>
+                <label><input type="radio" name="french_q1" value="C"> C) Gracias</label><br>
+                <label><input type="radio" name="french_q1" value="D"> D) Arigato</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What is the French word for "Goodbye"?</p>
+                <label><input type="radio" name="french_q2" value="A"> A) Au revoir</label><br>
+                <label><input type="radio" name="french_q2" value="B"> B) Tschüss</label><br>
+                <label><input type="radio" name="french_q2" value="C"> C) Adiós</label><br>
+                <label><input type="radio" name="french_q2" value="D"> D) Ciao</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Which of these is a traditional French food?</p>
+                <label><input type="radio" name="french_q3" value="A"> A) Croissant</label><br>
+                <label><input type="radio" name="french_q3" value="B"> B) Paella</label><br>
+                <label><input type="radio" name="french_q3" value="C"> C) Sushi</label><br>
+                <label><input type="radio" name="french_q3" value="D"> D) Pizza</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. What is the French word for "Hello"?</p>
+                <label><input type="radio" name="french_q4" value="A"> A) Bonjour</label><br>
+                <label><input type="radio" name="french_q4" value="B"> B) Hola</label><br>
+                <label><input type="radio" name="french_q4" value="C"> C) Konnichiwa</label><br>
+                <label><input type="radio" name="french_q4" value="D"> D) Hallo</label>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. Which script is primarily used in French writing?</p>
+                <label><input type="radio" name="french_q5" value="A"> A) Latin</label><br>
+                <label><input type="radio" name="french_q5" value="B"> B) Cyrillic</label><br>
+                <label><input type="radio" name="french_q5" value="C"> C) Kanji</label><br>
+                <label><input type="radio" name="french_q5" value="D"> D) Arabic</label>
+            </div>
+            <!-- Topic: Men 6 -->
+            <div class="quiz-question">
+                <p>6. What is the word for "man" in French?</p>
+                <img src="{% static 'Quiz/men.jpg' %}" alt="Man" class="quiz-image">
+                <label><input type="radio" name="french_q6" value="A"> A) Homme</label><br>
+                <label><input type="radio" name="french_q6" value="B"> B) Garçon</label><br>
+                <label><input type="radio" name="french_q6" value="C"> C) Personne</label><br>
+                <label><input type="radio" name="french_q6" value="D"> D) Mari</label>
+            </div>
+
+            <!-- Topic: Swimming 7 -->
+            <div class="quiz-question">
+                <p>7. What is the French word for "swimming"?</p>
+                <img src="{% static 'Quiz/swimming.jpg' %}" alt="Swimming" class="quiz-image">
+                <label><input type="radio" name="french_q7" value="A"> A) Natation</label><br>
+                <label><input type="radio" name="french_q7" value="B"> B) Course</label><br>
+                <label><input type="radio" name="french_q7" value="C"> C) Plongée</label><br>
+                <label><input type="radio" name="french_q7" value="D"> D) Vélo</label>
+            </div>
+
+            <!-- Topic: Crying 8 -->
+            <div class="quiz-question">
+                <p>8. What is the French word for "crying"?</p>
+                <img src="{% static 'Quiz/crying.jpg' %}" alt="Crying" class="quiz-image">
+                <label><input type="radio" name="french_q8" value="A"> A) Pleurer</label><br>
+                <label><input type="radio" name="french_q8" value="B"> B) Rire</label><br>
+                <label><input type="radio" name="french_q8" value="C"> C) Dormir</label><br>
+                <label><input type="radio" name="french_q8" value="D"> D) Chanter</label>
+            </div>
+
+            <!-- Topic: Laughing 9 -->
+            <div class="quiz-question">
+                <p>9. What is the French word for "laughing"?</p>
+                <img src="{% static 'Quiz/laughing.jpg' %}" alt="Laughing" class="quiz-image">
+                <label><input type="radio" name="french_q9" value="A"> A) Rire</label><br>
+                <label><input type="radio" name="french_q9" value="B"> B) Parler</label><br>
+                <label><input type="radio" name="french_q9" value="C"> C) Pleurer</label><br>
+                <label><input type="radio" name="french_q9" value="D"> D) Crier</label>
+            </div>
+
+            <!-- Topic: Place Name 10 -->
+            <div class="quiz-question">
+                <p>10. What is the French translation of "Paris"?</p>
+                <img src="{% static 'Quiz/museum.jpg' %}" alt="Paris" class="quiz-image">
+                <label><input type="radio" name="french_q10" value="A"> A) Eiffel Tower</label><br>
+                <label><input type="radio" name="french_q10" value="B"> B) Notre-Dame Cathedral</label><br>
+                <label><input type="radio" name="french_q10" value="C"> C) Louvre Museum</label><br>
+                <label><input type="radio" name="french_q10" value="D"> D) Mont Saint-Michel</label>
+
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="button" class="submit-btn" onclick="checkAnswers()">Submit Quiz</button>
+</div>
+
+
+<script>
+    // JavaScript function to show the quiz based on the button clicked
+    function showQuiz(language) {
+        // Hide all quizzes
+        const quizzes = document.querySelectorAll('.quiz-section');
+        quizzes.forEach(quiz => quiz.style.display = 'none');
+
+        // Show the selected quiz
+        document.getElementById(language + 'Quiz').style.display = 'block';
+    }
+
+    // JavaScript function to check the answers and mark correct ones in green
+    function checkAnswers() {
+        const answers = {
+            japanese_q1: 'A', // Arigato (Thank you)
+            japanese_q2: 'B', // Sayonara (Goodbye)
+            japanese_q3: 'A', // Sushi (Traditional Japanese food)
+            japanese_q4: 'A', // Konnichiwa (Hello)
+            japanese_q5: 'A', // Kanji (Writing script used in Japanese)
+
+            japanese_q6: 'A', // 虎 (Tora) - Tiger
+            japanese_q7: 'A', // ラーメン (Rāmen) - Ramen
+            japanese_q8: 'A', // ジャケット (Jaketto) - Jacket
+            japanese_q9: 'A', // 象 (Zou) - Elephant
+            japanese_q10: 'A', // アイスクリーム (Aisu Kurīmu) - Ice Cream
+
+
+            german_q1: 'A', // Danke (Thank you)
+            german_q2: 'A', // Tschüss (Goodbye)
+            german_q3: 'A', // Bratwurst (Traditional German food)
+            german_q4: 'A', // Hallo (Hello)
+            german_q5: 'A', // Latin (Script used in German writing)
+
+            german_q6: 'A', // Delfin (Dolphin)
+            german_q7: 'A', // Pasta (Pasta)
+            german_q8: 'A', // Hut (Hat)
+            german_q9: 'A', // Elefant (Elephant)
+            german_q10: 'A', // Eiscreme (Ice Cream)
+
+
+            spanish_q1: 'A', // "Gracias"
+            spanish_q2: 'A', // "Adiós"
+            spanish_q3: 'A', // "Paella"
+            spanish_q4: 'A', // "Hola"
+            spanish_q5: 'A', // "Latin"
+            spanish_q6: 'A', // "Botella"
+            spanish_q7: 'A', // "Perro"
+            spanish_q8: 'A', // "Casa"
+            spanish_q9: 'A', // "Torre Eiffel"
+            spanish_q10: 'A', // "Árbol"
+
+
+            french_q1: 'A',
+            french_q2: 'A',
+            french_q3: 'A',
+            french_q4: 'A',
+            french_q5: 'A',
+            french_q6: 'A',
+            french_q7: 'A',
+            french_q8: 'A',
+            french_q9: 'A',
+            french_q10: 'C'
+        };
+
+        let score = 0;
+
+        // Loop through all the questions
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input[type="radio"]:checked');
+
+        inputs.forEach(input => {
+            const questionName = input.name;
+            const selectedAnswer = input.value;
+            if (selectedAnswer === answers[questionName]) {
+                input.closest('.quiz-question').classList.add('correct');
+                score++;
+            } else {
+                input.closest('.quiz-question').classList.add('incorrect');
+            }
+        });
+    }
+</script>
+
+{% endblock %}
+
+</html>

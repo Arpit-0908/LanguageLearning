@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Best Way To Learn{% endblock %}</title>
+
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sty.css' %}">
+
+    {% block extra_css %}{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (ensure it's placed before closing </body> tag) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .messages {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none;
+            /* Initially hidden */
+        }
+
+        .alert {
+            padding: 20px 20px;
+            border-radius: 15px;
+            font-size: 20px;
+            text-align: center;
+            color: #fff;
+            background-color: #333;
+            font-weight: 600;
+            opacity: 0;
+            /* Start invisible */
+            animation: fade-in-out 2s ease-in-out forwards;
+        }
+
+        .alert-success {
+            background-color: #33c016;
+            /* Green for success messages */
+        }
+
+        .alert-error {
+            background-color: #d32929;
+            /* Red for error messages */
+        }
+
+        .alert-info {
+            background-color: #17a2b8;
+            /* Blue for info messages */
+        }
+
+        .alert-warning {
+            background-color: #ffc107;
+            /* Yellow for warning messages */
+        }
+
+        @keyframes fade-in-out {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .footer {
+            background-color: #1a202c;
+            /* Dark background for contrast */
+            color: #ffffff;
+            /* White text for readability */
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 1rem;
+            border-top: 2px solid #4c51bf;
+            /* Subtle border for separation */
+        }
+
+        .footer p {
+            margin: 0;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            /* Space between list items */
+        }
+
+        .footer ul li {
+            display: inline;
+        }
+
+        .footer ul li a {
+            color: #4c51bf;
+            /* Soft purple links */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer ul li a:hover {
+            color: #2b6cb0;
+            /* Darker shade on hover */
+            text-decoration: underline;
+            /* Underline for emphasis */
+        }
+
+        .footer ul li a:focus {
+            outline: none;
+            border-bottom: 2px solid #ffffff;
+            /* Visible focus state */
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <style>
+        .navbar {
+            background-image: url("{% static 'images/navimages.jpg' %}");
+            background-color: rgba(255, 255, 255, 0.2);
+            background-repeat: repeat;
+            background-position: center;
+            background-blend-mode: overlay;
+            padding: 1rem;
+            height: 100px;
+            display: flex;
+            border-bottom: 1px solid #bdbdbd;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Style for the dropdown container */
+        .dropdown {
+            position: relative;
+        }
+
+        /* Style for the dropdown menu */
+        .dropdown .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ef851cec;
+            /* Change the background color */
+            border: 1px solid #ddd;
+            min-width: 150px;
+            padding: 0;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Style for each list item in the dropdown */
+        .dropdown-menu li {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 5px;
+            font-size: 10px;
+            margin-top: 5px;
+            /* Add a gap between the items */
+        }
+
+        /* Remove border from the last item */
+        .dropdown-menu li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            
+        }
+
+        /* Style for the links inside the dropdown */
+        .dropdown-menu li a {
+            color: #333;
+            /* Change the text color */
+            padding: 5px 0px;
+            
+            display: block;
+            /* Ensure the links take up the full width of the container */
+        }
+
+        /* Style for hover effect */
+        .dropdown-menu li a:hover {
+            background-color: #3b3333;
+            /* Background color on hover */
+        }
+
+
+
+        .logo img {
+            height: 70px;
+            width: 120px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            margin-left: 200px;
+
+        }
+
+        .nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #f5f5f5;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: color 0.3s;
+            font-weight: 600;
+            margin-left: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .nav a:hover {
+            color: #2a9d8f;
+        }
+
+        .auth-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .auth-nav .nav-link {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .auth-nav .nav-link:hover {
+            color: #e63946;
+        }
+
+        /* Welcome Message Styling */
+        .auth-nav .welcome-message {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2a9d8f;
+            padding: 0.5rem 1rem;
+            background-color: #f4f4f4;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Logout Button Styling */
+        .auth-nav .logout-btn {
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            color: white;
+            background-color: #e63946;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .auth-nav .logout-btn:hover {
+            background-color: #d62839;
+            transform: scale(1.05);
+        }
+
+        .auth-nav .logout-btn:active {
+            background-color: #b71c1c;
+        }
+    </style>
+
+    <div class="navbar">
+        <!-- Left Section: Logo and Navigation -->
+        <div class="logo">
+            <img src="{% static 'images/main_logo.png' %}" alt="Logo" />
+            <div class="nav">
+                <ul>
+                    <li><a href="{% url 'index' %}#teachers">Find a Teacher</a></li>
+                    <li><a href="{% url 'chat' %}">Chat Box</a></li>
+                    <li><a href="{% url 'index' %}#bt">Become A Teacher</a></li>
+                    <li><a href="{% url 'review' %}">Reviews</a></li>
+                    <li><a href="{% url 'quiz' %}">Quizes</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                            aria-expanded="false">Materials <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'Hindi' %}#Hindi">Hindi</a></li>
+                            <li><a href="{% url 'japan' %}#Japanese">Japanese</a></li>
+                            <li><a href="{% url 'German' %}#German">German</a></li>
+                            <li><a href="{% url 'Spanish' %}#Spanish">Spanish</a></li>
+                            <li><a href="{% url 'French' %}#French">French</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Section: Authentication Links -->
+        <div class="auth-nav">
+            {% if user.is_authenticated %}
+            <span class="welcome-message">Welcome, {{ user.username }}</span>
+            <button class="logout-btn" onclick="window.location.href='{% url 'login' %}'">Logout</button>
+            {% else %}
+            <a class="nav-link" href="{% url 'UserRegisterPageCall' %}">Register</a>
+            <a class="nav-link" href="{% url 'login1' %}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <main>
+        {% block body %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 italki. All rights reserved.</p>
+        <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const messages = document.querySelector(".messages");
+
+            if (messages) {
+                messages.style.display = "block"; // Show messages
+                setTimeout(() => {
+                    messages.style.display = "none"; // Hide messages after 3 seconds
+                }, 2000); // 3000ms = 3 seconds
+            }
+        });
+    </script>
+
+    {% block extra_js %}
+    {% endblock %}
+</body>
+
+</html>

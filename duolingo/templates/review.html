@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Class Booking {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sty.css' %}">
+
+</head>
+
+{% block body %}
+
+<style>
+    /* Global Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    /* Header */
+    header {
+        background-color: #4CAF50;
+        padding: 20px 0;
+    }
+
+    header .container {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    header h1 {
+        color: white;
+        font-size: 2em;
+    }
+
+    header nav ul {
+        list-style-type: none;
+    }
+
+    header nav ul li {
+        display: inline;
+        margin-left: 20px;
+    }
+
+    header nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1em;
+    }
+
+    header nav ul li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Reviews Section */
+    .reviews-section {
+        padding: 40px 0;
+        margin-top: 10px;
+        background: url("{% static 'images/reviewback.jpg' %}") center center/cover;
+        color: #ffffff;
+        margin-bottom: 50px;
+    }
+
+    .reviews-section h2 {
+        text-align: center;
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .review-cards {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .review-card {
+        background: rgba(255, 255, 255, 0.9);
+        /* Semi-transparent white background */
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 300px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333;
+        /* Dark text for better contrast */
+    }
+
+    .review-card h3 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+    }
+
+    .review-card p {
+        font-size: 1.1em;
+        line-height: 1.5;
+    }
+
+    .review-card strong {
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+    /* Form Section */
+    .review-form {
+        margin-top: 40px;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .review-form h2 {
+        font-size: 2em;
+        color: #333;
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container input,
+    .form-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1em;
+    }
+
+    .form-container button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.2em;
+    }
+
+    .form-container button:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<section id="reviews" class="reviews-section">
+    <div class="container">
+        <h2>What People Are Saying</h2>
+        <div class="review-cards">
+            <div class="review-card">
+                <h3>Great Platform for Learning!</h3>
+                <p>"This learning platform is a game-changer! The courses are well-structured, and the instructors are
+                    top-notch. I have learned so much in such a short time!"</p>
+                <br>
+                <p><strong>- John Doe</strong></p>
+            </div>
+
+            <div class="review-card">
+                <h3>Highly Recommend It!</h3>
+                <p>"The variety of courses available is amazing, and I love the interactive exercises. The platform is
+                    easy to navigate, and I feel supported throughout my learning journey."</p>
+                <br>
+                <p><strong>- Sarah Lee</strong></p>
+            </div>
+
+            <div class="review-card">
+                <h3>Amazing Content!</h3>
+                <p>"The content is informative, and I can learn at my own pace. The quizzes are a great way to test my
+                    understanding of the material. It's definitely worth the subscription."</p>
+                <br>
+                <p><strong>- Alex Smith</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Review Submission Form -->
+<section id="submit-review" class="review-form">
+    <h2>Write Your Review</h2>
+    <div class="form-container">
+        <input type="text" id="reviewer-name" placeholder="Your Name" required />
+        <input type="text" id="review-title" placeholder="Review Title" required />
+        <textarea id="review-content" rows="4" placeholder="Write your review..." required></textarea>
+        <button type="button" onclick="submitReview()">Submit Review</button>
+    </div>
+</section>
+
+
+<script>
+    // JavaScript to handle review submission
+    // Function to convert text to sentence case
+    function toSentenceCase(text) {
+        return text.replace(/(^\s*|[\.\!\?]\s+)([a-z])/g, function (match, prefix, letter) {
+            return prefix + letter.toUpperCase();
+        });
+    }
+
+    // JavaScript to handle review submission
+    function submitReview() {
+        const name = document.getElementById('reviewer-name').value;
+        const title = document.getElementById('review-title').value;
+        const content = document.getElementById('review-content').value;
+
+        if (name && title && content) {
+            // Convert content to sentence case
+            const sentenceCasedContent = toSentenceCase(content);
+
+            // Create a new review card
+            const reviewCard = document.createElement('div');
+            reviewCard.classList.add('review-card');
+
+            const reviewTitle = document.createElement('h3');
+            reviewTitle.textContent = title;
+            const reviewContent = document.createElement('p');
+            reviewContent.textContent = `"${sentenceCasedContent}"`;
+
+            const lineBreak = document.createElement('br');
+            const reviewAuthor = document.createElement('p');
+            reviewAuthor.innerHTML = `<strong>- ${name}</strong>`;
+
+            reviewCard.appendChild(reviewTitle);
+            reviewCard.appendChild(reviewContent);
+            reviewCard.appendChild(lineBreak);
+            reviewCard.appendChild(reviewAuthor);
+
+            document.querySelector('.review-cards').appendChild(reviewCard);
+
+            document.getElementById('reviewer-name').value = '';
+            document.getElementById('review-title').value = '';
+            document.getElementById('review-content').value = '';
+        } else {
+            alert('Please fill out all fields before submitting your review.');
+        }
+    }
+
+</script>
+
+
+{% endblock %}
+
+</html>

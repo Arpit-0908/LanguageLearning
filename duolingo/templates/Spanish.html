@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - Spanish Material {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+
+</head>
+{% block body %}
+<header>
+    <div class="header-container">
+        <h1>Learn About Different Languages</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'Spanish' %}">Spanish</a></li>
+                <li><a href="{% url 'Hindi' %}">Hindi</a></li>
+                <li><a href="{% url 'japan' %}">Japanese</a></li>
+                <li><a href="{% url 'German' %}">German</a></li>
+                <li><a href="{% url 'French' %}">French</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- Spanish Section -->
+<section id="spanish" class="language-section">
+    <h2>Spanish</h2>
+    <div class="language-content">
+        <div class="language-image">
+            {% load static %}
+
+            <img src="{% static 'images/spain.jpg' %}" alt="Spanish Culture" />
+
+        </div>
+
+        <h3>Introduction</h3>
+        <p>Spanish is a Romance language spoken by over 460 million people, primarily in Spain and Latin America. It is
+            one of the most widely spoken languages in the world. Spanish is a phonetic language, meaning that it is
+            pronounced largely as it is written. The language is influenced by Latin, and it shares many similarities
+            with other Romance languages like French, Italian, and Portuguese. Spanish is known for its rich literary
+            tradition and its widespread influence on global culture.</p>
+
+        <h3>Common Phrases</h3>
+        <ul>
+            <li><strong>Hello:</strong> Hola</li>
+            <li><strong>Good morning:</strong> Buenos días</li>
+            <li><strong>Thank you:</strong> Gracias</li>
+            <li><strong>Goodbye:</strong> Adiós</li>
+            <li><strong>Yes:</strong> Sí</li>
+            <li><strong>No:</strong> No</li>
+            <li><strong>Excuse me / I'm sorry:</strong> Perdón / Lo siento</li>
+            <li><strong>How are you?</strong> ¿Cómo estás?</li>
+            <li><strong>Good evening:</strong> Buenas noches</li>
+            <li><strong>Good night:</strong> Buenas noches</li>
+            <li><strong>I'm fine, thank you:</strong> Estoy bien, gracias</li>
+            <li><strong>What is your name?</strong> ¿Cómo te llamas?</li>
+            <li><strong>My name is...</strong> Me llamo...</li>
+            <li><strong>Where is the bathroom?</strong> ¿Dónde está el baño?</li>
+            <li><strong>I don't understand:</strong> No entiendo</li>
+            <li><strong>Can you speak English?</strong> ¿Puedes hablar inglés?</li>
+            <li><strong>Please:</strong> Por favor</li>
+            <li><strong>Sorry for the wait:</strong> Perdón por la espera</li>
+            <li><strong>I am lost:</strong> Estoy perdido/a</li>
+            <li><strong>Help:</strong> Ayuda</li>
+            <li><strong>How much is this?</strong> ¿Cuánto cuesta esto?</li>
+            <li><strong>Delicious:</strong> Delicioso/a</li>
+            <li><strong>It’s okay / No problem:</strong> Está bien / No hay problema</li>
+
+        </ul>
+        <br>
+        <h3>Cultural Facts</h3>
+        <ul>
+            <li>Spanish is the official language of 20 countries, primarily in Latin America and Spain.</li>
+            <li>The Spanish language has two main dialects: European Spanish and Latin American Spanish.</li>
+            <li>Spanish culture is known for its food, music, flamenco dancing, and lively festivals like La Tomatina
+                and
+                running with the bulls in Pamplona.</li>
+            <li>Spain has a rich history with influences from the Romans, Moors, and other European cultures.</li>
+            <li>Popular cultural exports include tapas, paella, soccer, and the works of famous artists like Picasso and
+                Salvador Dalí.</li>
+        </ul>
+        <br><br>
+        <h3>Language Structure</h3>
+        <p>Spanish has a subject-verb-object (SVO) sentence structure, meaning that the subject comes first, followed
+            by the verb, and then the object. For example:</p>
+        <p><em>Yo estudio español.</em> (I study Spanish.)</p>
+        <p>Spanish verbs are conjugated based on tense, mood, and subject. This means that the verb changes according
+            to who is performing the action and when it is taking place.</p>
+        <br><br>
+        <div class="image">
+            {% load static %}
+
+            <img src="{% static 'images/fun.png' %}" alt="Spanish Culture" />
+
+        </div>
+        <h3>Fun Facts About Spanish Language</h3>
+        <ul>
+            <li>Spanish has two grammatical genders: masculine and feminine, and every noun is categorized as either
+                one or the other.</li>
+            <li>Spanish is considered a "phonetic" language, which means that words are pronounced as they are written
+                most of the time.</li>
+            <li>There are more than 400 million native Spanish speakers worldwide, making it one of the most widely
+                spoken languages.</li>
+        </ul>
+        <br><br>
+        <h3>Learning Tips for Spanish</h3>
+        <ul>
+            <li><strong>Practice pronunciation:</strong> Spanish pronunciation is quite regular, but it’s important to
+                master the sounds of vowels and consonants to sound natural.</li>
+            <li><strong>Learn vocabulary in context:</strong> Use language learning apps and watch Spanish media to
+                reinforce vocabulary.</li>
+            <li><strong>Immerse yourself:</strong> Listen to Spanish music, watch movies, or try language exchange
+                programs with native speakers.</li>
+            <li><strong>Use flashcards for memorizing words:</strong> Repetition is key to retaining vocabulary in
+                Spanish.</li>
+        </ul>
+        <br><br>
+        <!-- Display Download Link for Spanish PDF -->
+        <h3>Download Materials</h3>
+        <ul id="spanish-pdf-links">
+            <li><a href="{% static 'Documents/spangr.pdf' %}" download>Download Spanish Grammer Book PDF</a></li>
+            <li><a href="{% static 'Documents/learningspanish.pdf' %}" download>Download Learning Spanish PDF</a></li>
+        </ul>
+    </div>
+</section>
+
+<style>
+    .image {
+        display: flex;
+        justify-content: center;
+        /* Centers the image horizontally */
+        align-items: center;
+        /* Centers the image vertically */
+        height: 100%;
+        /* Ensure the parent div has height to center vertically */
+    }
+
+    .image img {
+        width: 100%;
+        /* Makes the image responsive to the container's width */
+        max-width: 300px;
+        /* Limits the maximum width to 300px */
+        height: auto;
+        /* Maintains the aspect ratio */
+        border-radius: 8px;
+        /* Optional: Adds rounded corners to the image */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Optional: Adds a soft shadow to the image */
+    }
+
+    /* General Page Styling */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #504b2c;
+        padding: 20px 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+        margin: 0;
+        font-size: 2.5em;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #f39c12;
+    }
+
+    main {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Language Section */
+    .language-section {
+        background-color: #ffffff;
+        margin: 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .language-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .language-section h2 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 15px;
+        letter-spacing: 1px;
+    }
+
+    .language-content h3 {
+        color: #34495e;
+        margin-top: 15px;
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+
+    .language-content ul {
+        padding-left: 20px;
+        margin-top: 10px;
+    }
+
+    .language-content ul li {
+        margin-bottom: 5px;
+    }
+
+    .language-content img {
+        width: 100%;
+        border-radius: 10px;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    #spanish-pdf-links li a {
+        text-decoration: none;
+        color: #2980b9;
+        font-weight: 500;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    #spanish-pdf-links li a:hover {
+        color: #2c3e50;
+    }
+</style>
+
+{% endblock %}

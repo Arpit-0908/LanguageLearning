@@ -1,0 +1,158 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    color: #fff; /* Change text color to white for contrast */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    min-height: 100vh; /* Full height */
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 1rem;
+    height: 100px;
+    display: flex;
+    border-bottom: 1px solid #bdbdbd;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; /* Stick navbar to the top */
+    top: -100px; /* Ensures it sticks to the top */
+    width: 100%; /* Full width */
+    z-index: 10; /* Ensure it appears above other content */
+}
+
+.logo img {
+    height: 70px;
+    width: 120px;
+}
+
+.nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.nav li {
+    margin-right: 25px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-weight: 600;
+}
+
+.nav a:hover {
+    color: #2a9d8f; /* Change color on hover */
+}
+
+/* Login container styles */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(211, 200, 49, 0.9); /* Dark overlay for better contrast */
+    padding: 50px; /* Adjusted padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(255, 17, 17, 0.5); /* Shadow for depth */
+    margin-top: 80px; /* Adjust for navbar height */
+    width: 100%;
+    max-width: 400px; /* Limit form width */
+    margin-bottom: 78px; /* Space below the form */
+}
+
+/* Heading styles */
+h2 {
+    margin-bottom: 1rem;
+    color: #fff; /* White text for headings */
+}
+
+/* Error messages */
+.error-message {
+    color: red; /* Error text color */
+    margin-top: 10px; /* Space above error message */
+}
+
+/* Form fields */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align label and input to the left */
+}
+
+/* Style for label */
+label {
+    display: block; /* Make label a block element */
+    margin-bottom: 0.5rem; /* Space between label and input */
+    font-weight: bold; /* Bold font for the label */
+    color: #fff; /* White text for labels */
+}
+
+/* Style for input fields */
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Full width */
+    padding: 0.75rem; /* Padding inside input */
+    border: 1px solid #ddd; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 1rem; /* Font size */
+    transition: border-color 0.3s; /* Smooth border color change */
+}
+
+/* Change border color on focus */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #2a9d8f; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Button styles */
+button {
+    width: 100%; /* Full width */
+    padding: 0.75rem; /* Padding inside button */
+    background-color: #d52424; /* Button color */
+    color: #fff; /* White text for button */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 1rem; /* Font size */
+    transition: background-color 0.3s; /* Smooth background color change */
+}
+
+button:hover {
+    background-color: #21867a; /* Darker button color on hover */
+}
+
+/* Forgot password link */
+.forgot-password {
+    text-align: center; /* Centered text */
+    margin-top: 1rem; /* Space above link */
+    color: #fff; /* White text for link */
+}
+
+/* Redirect to login */
+.login-redirect {
+    margin-top: 1rem; /* Space above link */
+    color: #fff; /* White text for redirect text */
+}
+
+/* Link styles */
+a {
+    text-decoration: none; /* No underline */
+    color: rgb(0, 0, 0); /* Black text for links */
+    font-weight: 600;
+}

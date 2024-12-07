@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - italki</title>
+    {% load static %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/nav.png' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <style>
+        body {
+            background-image: url('{% load static %}{% static "images/back.jpg" %}');
+            background-size: cover;
+            background-color: rgba(255, 255, 255, 0.4);
+            background-blend-mode: overlay;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <style>
+        .messages {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            /* Ensure it appears above other elements */
+            display: none;
+            /* Initially hidden */
+        }
+
+        .alert {
+            padding: 20px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+            background-color: #333;
+            /* Default background */
+            opacity: 0;
+            /* Start invisible */
+            animation: fade-in-out 3s ease-in-out forwards;
+        }
+
+        .alert-success {
+            background-color: #28a745;
+            /* Green for success messages */
+        }
+
+        .alert-error {
+            background-color: #d32929;
+            /* Red for error messages */
+        }
+
+        .alert-info {
+            background-color: #17a2b8;
+            /* Blue for info messages */
+        }
+
+        .alert-warning {
+            background-color: #ffc107;
+            /* Yellow for warning messages */
+        }
+
+        /* Fade-in-out animation */
+        @keyframes fade-in-out {
+            0% {
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+    <style>
+        
+        .navbar {
+            background-image: url("{% static 'images/navimg.jpg' %}"); /* Background image */
+            background-color: rgba(255, 255, 255, 0.6);
+            background-repeat: repeat; /* Repeat the background image */
+            background-position: center; /* Position the image at the center */
+            background-blend-mode: overlay;
+            padding: 1rem;
+            height: 100px;
+            display: flex;
+            border-bottom: 1px solid #bdbdbd;
+            justify-content: space-between;
+            align-items: center;
+        }   
+.logo img {
+    height: 70px;
+    width: 120px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.nav ul {
+    display: flex; /* Arrange list items horizontally */
+    list-style: none; /* Remove default list styling */
+}
+
+.nav li {
+    margin-right: 25px; /* Space out the list items */
+}
+
+.nav a {
+    text-decoration: none; /* Remove underline */
+    color: #000000; /* Text color */
+    font-size: 1.1rem; /* Font size */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+    transition: color 0.3s; /* Smooth color transition */
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav a:hover {
+    color: #2a9d8f; /* Change color on hover */
+}
+
+    </style>
+<div class="navbar">
+    <div class="logo">
+        <img src="{% static 'images/main_logo.png' %}" alt="Logo"/>
+    </div>
+    <div class="nav">
+        <ul>
+            <li><a href="{% url 'index' %}#teachers">Find a Teacher</a></li>
+            <li><a href="{% url 'chat' %}">Chat Box</a></li>
+            <li><a href="{% url 'index' %}#bt">Become A Teacher</a></li>
+            <li><a href="{% url 'login' %}">Log in</a></li>
+            <li><a href="{% url 'register' %}">Sign up</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="register-container">
+    <h2>Create an Account</h2>
+    <br>
+
+    {% if form.errors %}
+    <div class="error-message" style="color: red;">
+        <p>There was a problem with your registration:</p>
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'register' %}" id="registerForm">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="full_name">Full Name:</label>
+            {{ form.full_name }} <!-- Full name field -->
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            {{ form.username }}
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            {{ form.email }}
+        </div>
+
+      
+
+        <div class="form-group">
+            <label for="phone_number">Phone Number:</label>
+            {{ form.phone_number }} <!-- Phone number field -->
+        </div>
+
+       
+        
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            {{ form.password1 }}
+        </div>
+
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password:</label>
+            {{ form.password2 }}
+        </div>
+        <div class="form-group">
+            <label for="interested_language">Interested in Learning a Language:</label>
+            {{ form.interested_language }} <!-- Render the dropdown field -->
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Register</button>
+        </div>
+
+        <p id="error-message" style="color:red;"></p>
+    </form>
+
+    <div class="login-redirect">
+        <p>Already have an account? <a href="{% url 'login' %}">Log in here</a></p>
+    </div>
+</div>
+
+</body>
+</html>

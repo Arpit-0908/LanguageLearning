@@ -1,0 +1,201 @@
+/* General Styling for Payment Container */
+.payment-container {
+    max-width: 700px; /* Increased width */
+    margin-left: 400px;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+
+/* Heading Styling */
+.payment-container h2, .payment-container h3 {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Balance Section */
+.balance-section {
+    margin-bottom: 30px;
+}
+
+/* Input Field Styling */
+.balance-section input[type="text"] {
+    padding: 12px;
+    width: 75%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Button Styling */
+.balance-section button {
+    padding: 12px 20px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.balance-section button:hover {
+    background-color: #e06f12;
+}
+
+/* Payment Methods */
+.method {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.method input[type="radio"] {
+    margin-right: 10px; /* Add space between the radio button and text */
+}
+
+/* Net Banking Dropdown */
+#net-banking-options {
+    width: 30%;
+    height: 35px;
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Radio Button Styling */
+
+/* Styling for Payment Logos */
+.method label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+    padding-right: 30px;
+    font-size: 16px; /* Change font size for better readability */
+}
+
+.method label img {
+    height: 30px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.method label img:hover {
+    filter: brightness(1.1);
+    transform: scale(1.1);
+}
+
+/* Confirm Button */
+.confirm-btn {
+    display: block;
+    width: 80%;
+    padding: 14px 0;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.confirm-btn:hover {
+    background-color: #218838;
+}
+
+/* Additional Styling */
+.payment-container .net-banking,
+.payment-container .upi-section {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Select and Input Fields */
+.payment-container select,
+.payment-container input[type="text"].upi-id {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* QR Code Styling */
+.payment-container .qr-code {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+/* Mobile Responsive Styling */
+@media (max-width: 768px) {
+    .payment-container {
+        padding: 20px;
+    }
+
+    .balance-section input[type="text"],
+    .balance-section button,
+    .confirm-btn {
+        width: 90%;
+    }
+
+    .method label {
+        flex-direction: column;
+    }
+
+    .payment-container select,
+    .payment-container input[type="text"].upi-id {
+        width: 90%;
+    }
+}
+.order-details {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff; /* Make text color white for better contrast */
+}
+
+.order-details h3 {
+    color: #ffffff;
+    font-size: 29px; /* Increase font size for better visibility */
+    margin-bottom: 15px;
+}
+
+.order-details p {
+    margin: 5px 0;
+    font-size: 17px;
+    color: white;
+}
+
+#payment-link {
+    text-decoration: none;
+    color: #fff; /* Ensure the payment link text is white */
+}

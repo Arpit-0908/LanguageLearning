@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Interface</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif; /* Use the new font */
+            background-image: linear-gradient(to right, #add8e6, #ffcccb, #fff5ba, #ffe4b5); /* Pastel rainbow gradient background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height */
+            margin: 0; /* Remove default margin */
+            color: #333; /* Default text color */
+        }
+
+        .chat-container {
+            width: 400px;
+            max-width: 90%; /* Responsive width */
+            background-color: rgba(230, 230, 250, 0.95); /* Lavender background */
+            border-radius: 16px; /* Rounded corners */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Soft shadow */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Flexbox for vertical layout */
+        }
+
+        .chat-header {
+            background-color: #8a7bca; /* Lavender header */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px; /* Increased font size */
+            font-weight: 700; /* Bold header */
+            border-bottom-left-radius: 16px; /* Rounded bottom corners */
+            border-bottom-right-radius: 16px; /* Rounded bottom corners */
+        }
+
+        .chat-body {
+            padding: 15px;
+            height: 400px;
+            overflow-y: auto;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            flex-grow: 1; /* Allow body to grow */
+            display: flex;
+            flex-direction: column; /* Ensure messages stack vertically */
+        }
+
+        .chat-message {
+            padding: 12px 15px; /* More padding for messages */
+            margin: 10px 0;
+            border-radius: 20px; /* Rounded message bubbles */
+            max-width: 80%;
+            word-wrap: break-word; /* Handle long messages */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for message bubbles */
+        }
+
+        .user-message {
+            background-color: #99d4e3; /* Light turquoise for user message */
+            color: #333; /* Text color for user message */
+            align-self: flex-end; /* Align to the right */
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background-color: #f1c40f; /* Light yellow for bot message */
+            color: white; /* Text color for bot message */
+            align-self: flex-start; /* Align to the left */
+        }
+
+        .chat-footer {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #ddd; /* Divider line */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent footer */
+        }
+
+        .chat-footer input {
+            width: 100%;
+            padding: 12px; /* Increased padding for input */
+            border: 1px solid #ced4da; /* Subtle border */
+            border-radius: 20px; /* Rounded input field */
+            margin-right: 10px;
+            font-size: 16px; /* Larger font size */
+            color: #333; /* Dark text color for input */
+        }
+
+        .chat-footer button {
+            padding: 12px 20px; /* Adjusted button size */
+            background-color: #8a7bca; /* Lavender for button */
+            color: white;
+            border: none;
+            border-radius: 20px; /* Rounded button */
+            cursor: pointer;
+            font-size: 16px; /* Match button font size */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        .chat-footer button:hover {
+            background-color: #7a6ba5; /* Darker lavender on hover */
+        }
+
+        .options {
+            margin-top: 10px; /* Space above options */
+        }
+
+        .option-button {
+            background-color: #8a7bca; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 10px; /* Rounded corners */
+            padding: 8px 12px; /* Padding */
+            margin: 5px 0; /* Margin for spacing */
+            cursor: pointer; /* Pointer on hover */
+            font-size: 14px; /* Font size */
+            width: 100%; /* Full width */
+        }
+
+        .option-button:hover {
+            background-color: #7a6ba5; /* Darker lavender on hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        Chatbot
+        <br>
+        <a href="{% url 'index' %}" class="home-button">Home</a> 
+    </div>
+    <div class="chat-body" id="chat-body">
+        <!-- Messages will appear here -->
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+    // Predefined questions and answers
+    const responses = {
+        "hello": "Hello! What language would you like to learn today?",
+        "i want to learn a language": "Great! Which language interests you the most?",
+        "english": "English is a great choice! Are you looking for beginner or advanced resources?",
+        "spanish": "Spanish is wonderful! Would you like to focus on speaking, writing, or both?",
+        "french": "French is beautiful! Do you prefer learning through videos, books, or apps?",
+        "thank you": "You're welcome! If you have any more questions, feel free to ask.",
+        "help": "Sure! I can help you with language resources, tips, and more. What do you need?",
+        "what is the best way to learn a language?": "The best way varies for everyone, but immersion, practice, and consistency are key!",
+        "goodbye": "Goodbye! Happy learning!",
+        
+        // Subscription-related responses
+        "what language learning subscriptions do you recommend?": "I recommend platforms like Duolingo, Babbel, and Rosetta Stone. Each offers a variety of languages and engaging learning methods.",
+        "how much do language learning apps typically cost?": "Most language learning apps range from $5 to $30 per month depending on the features and languages offered. Some also provide discounts for longer commitments.",
+        "are there any free language learning resources available?": "Yes! Websites like Duolingo, BBC Languages, and Memrise offer free courses. You can also find language exchange partners on platforms like Tandem or HelloTalk.",
+        "which language platform offers the best subscription deals?": "Platforms like Rosetta Stone and Babbel often have promotional offers and discounts for first-time subscribers. It’s worth checking their websites for current deals!",
+        "do you offer a trial period for your language courses?": "Many language learning platforms, including Babbel and Lingoda, offer free trial periods. This allows you to explore their courses before committing.",
+        "what features should i look for in a language learning subscription?": "Look for features like interactive exercises, speaking practice, grammar explanations, progress tracking, and access to native speakers for conversation practice.",
+        "can i access multiple languages with a single subscription?": "Some platforms like Babbel allow you to learn multiple languages with a single subscription, while others may require separate subscriptions for each language.",
+        "are there any discounts for students or educators on language courses?": "Yes, many language platforms offer discounts for students and educators. Always check their website or contact customer support for available discounts.",
+        "what is the difference between monthly and yearly subscription plans?": "Monthly plans are more flexible but usually more expensive over time. Yearly plans often come at a reduced rate, providing savings if you commit to a full year of learning.",
+        "how can i cancel my language learning subscription?": "You can cancel your subscription through your account settings on the platform's website. Make sure to check the cancellation policy to avoid being charged for the next billing cycle."
+    };
+
+    // Options mapping for responses
+    const optionsMap = {
+        "hello": ["I want to learn a language", "What language do you recommend?"],
+        "i want to learn a language": ["English", "Spanish", "French"],
+        "english": ["Beginner resources", "Advanced resources"],
+        "spanish": ["Speaking", "Writing", "Both"],
+        "french": ["Videos", "Books", "Apps"],
+        "thank you": ["What else can I ask?", "Goodbye"],
+        "help": ["Resources", "Tips"],
+        "what is the best way to learn a language?": ["Immersion", "Practice"],
+        "goodbye": []
+    };
+
+    // Function to create options based on the user's last question
+    function createOptions(lastQuestion) {
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'options';
+
+        const options = optionsMap[lastQuestion] || [];
+        options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.className = 'option-button';
+            button.onclick = () => handleOptionClick(option, lastQuestion);
+            optionsContainer.appendChild(button);
+        });
+
+        document.getElementById('chat-body').appendChild(optionsContainer);
+        document.getElementById('chat-body').scrollTop = document.getElementById('chat-body').scrollHeight;
+    }
+
+    // Function to handle option click
+    function handleOptionClick(option, lastQuestion) {
+        var userMessage = document.createElement('div');
+        userMessage.className = 'chat-message user-message';
+        userMessage.textContent = option;
+        document.getElementById('chat-body').appendChild(userMessage);
+
+        // Simulate a bot response
+        setTimeout(function () {
+            var botMessage = document.createElement('div');
+            botMessage.className = 'chat-message bot-message';
+
+            // Provide responses based on the option clicked
+            if (lastQuestion === "hello") {
+                botMessage.textContent = "What language would you like to learn today?";
+            } else if (lastQuestion === "i want to learn a language") {
+                botMessage.textContent = `That's awesome! Learning ${option} can be very rewarding!`;
+            } else if (lastQuestion === "english") {
+                botMessage.textContent = option === "Beginner resources" ? 
+                "For beginners, consider apps like Duolingo or online courses." : 
+                "For advanced learners, try platforms like BBC Learning English.";
+            } else if (lastQuestion === "spanish") {
+                botMessage.textContent = `Focusing on ${option} will definitely improve your Spanish!`;
+            } else if (lastQuestion === "french") {
+                botMessage.textContent = `Learning through ${option} is effective!`;
+            } else if (lastQuestion === "thank you") {
+                botMessage.textContent = "You're welcome! If you have any more questions, feel free to ask.";
+            } else if (lastQuestion === "help") {
+                botMessage.textContent = "Sure! What specific resources do you need?";
+            } else if (lastQuestion === "what is the best way to learn a language?") {
+                botMessage.textContent = "The best way varies, but immersion and practice are key!";
+            } else if (lastQuestion === "goodbye") {
+                botMessage.textContent = "Goodbye! Happy learning!";
+            }
+
+            document.getElementById('chat-body').appendChild(botMessage);
+            document.getElementById('chat-body').scrollTop = document.getElementById('chat-body').scrollHeight;
+
+            // Create options after responding
+            createOptions(lastQuestion);
+        }, 1000);
+    }
+
+    // Function to send a message
+    function sendMessage() {
+        var userInput = document.getElementById('user-input').value.toLowerCase();
+        if (userInput.trim() === '') {
+            return; // Do nothing if input is empty
+        }
+
+        // Add user message to the chat
+        var chatBody = document.getElementById('chat-body');
+        var userMessage = document.createElement('div');
+        userMessage.className = 'chat-message user-message';
+        userMessage.textContent = userInput;
+        chatBody.appendChild(userMessage);
+
+        // Scroll to the bottom of the chat
+        chatBody.scrollTop = chatBody.scrollHeight;
+
+        // Clear the input field
+        document.getElementById('user-input').value = '';
+
+        // Generate bot response
+        setTimeout(function () {
+            var botMessage = document.createElement('div');
+            botMessage.className = 'chat-message bot-message';
+
+            // Check if the user input matches any predefined responses
+            if (userInput in responses) {
+                botMessage.textContent = responses[userInput];
+                // Create options after the response
+                createOptions(userInput);
+            } else {
+                botMessage.textContent = "I'm sorry, I didn't understand that. Can you ask something else?";
+                createOptions(''); // Provide generic options
+            }
+
+            chatBody.appendChild(botMessage);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }, 1000);
+    }
+
+    // Display initial message when the page loads
+    window.onload = function() {
+        var chatBody = document.getElementById('chat-body');
+        var initialBotMessage = document.createElement('div');
+        initialBotMessage.className = 'chat-message bot-message';
+        initialBotMessage.textContent = 'Welcome! What language would you like to learn today?'; // Initial bot message
+        chatBody.appendChild(initialBotMessage);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    };
+</script>
+
+</body>
+</html>

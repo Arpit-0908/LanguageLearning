@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}italki - French Material {% endblock %}</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image" href="{% static 'images/nav.png' %}">
+
+</head>
+{% block body %}
+<header>
+    <div class="header-container">
+        <h1>Learn About Different Languages</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'French' %}">French</a></li>
+                <li><a href="{% url 'japan' %}">Japanese</a></li>
+                <li><a href="{% url 'Hindi' %}">Hindi</a></li>
+                <li><a href="{% url 'German' %}">German</a></li>
+                
+                <li><a href="{% url 'Spanish' %}">Spanish</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<!-- French Section -->
+<section id="french" class="language-section">
+    <h2>French</h2>
+    <div class="language-content">
+        <div class="language-image">
+            {% load static %}
+            <img src="{% static 'images/france.jpg' %}" alt="French Culture" />
+        </div>
+
+        <h3>Introduction</h3>
+        <p>French is a Romance language spoken by over 220 million people worldwide, primarily in France, parts of Canada, and many African nations. It is a descendant of Latin, the language of the Roman Empire. French is known for its rich history, cultural influence, and is one of the official languages of many international organizations, including the United Nations. The language places a strong emphasis on formality and politeness in speech.</p>
+
+        <h3>Common Phrases</h3>
+        <ul>
+            <li><strong>Hello:</strong> Bonjour</li>
+            <li><strong>Good morning:</strong> Bonjour</li>
+            <li><strong>Thank you:</strong> Merci</li>
+            <li><strong>Goodbye:</strong> Au revoir</li>
+            <li><strong>Yes:</strong> Oui</li>
+            <li><strong>No:</strong> Non</li>
+            <li><strong>Excuse me / I'm sorry:</strong> Excusez-moi</li>
+            <li><strong>How are you?</strong> Comment ça va?</li>
+            <li><strong>Good evening:</strong> Bonsoir</li>
+            <li><strong>Good night:</strong> Bonne nuit</li>
+            <li><strong>I'm fine, thank you:</strong> Je vais bien, merci</li>
+            <li><strong>What is your name?</strong> Comment tu t'appelles?</li>
+            <li><strong>My name is...</strong> Je m'appelle...</li>
+            <li><strong>Where is the bathroom?</strong> Où sont les toilettes?</li>
+            <li><strong>I don't understand:</strong> Je ne comprends pas</li>
+            <li><strong>Can you speak English?</strong> Parlez-vous anglais?</li>
+            <li><strong>Please:</strong> S'il vous plaît</li>
+            <li><strong>Sorry for the wait:</strong> Désolé pour l'attente</li>
+            <li><strong>I am lost:</strong> Je suis perdu</li>
+            <li><strong>Help:</strong> Aidez-moi</li>
+            <li><strong>How much is this?</strong> Combien ça coûte?</li>
+            <li><strong>Delicious:</strong> Délicieux</li>
+            <li><strong>It’s okay / No problem:</strong> Ça va</li>
+        </ul>
+        <br>
+        <h3>Cultural Facts</h3>
+        <ul>
+            <li>The French language has a rich literary tradition, with famous authors such as Victor Hugo, Marcel Proust, and Albert Camus.</li>
+            <li>French is often considered the language of diplomacy and is one of the most studied languages worldwide.</li>
+            <li>France is known for its world-class cuisine, including iconic dishes like croissants, baguettes, and escargots.</li>
+            <li>French culture is celebrated for its art, cinema, and fashion, with Paris being a global hub for style and culture.</li>
+            <li>The French Revolution of 1789 had a significant impact on the development of democratic values and governance.</li>
+        </ul>
+        <br><br>
+        <h3>Language Structure</h3>
+        <p>French follows a subject-verb-object (SVO) sentence structure, similar to English. For example:</p>
+        <p><em>Je parle français.</em> (I speak French.)</p>
+        <p>French is known for its gendered nouns and the use of articles, which change depending on the gender and number of the noun.</p>
+        <br><br>
+        <div class="image">
+            {% load static %}
+            <img src="{% static 'images/fun.png' %}" alt="French Culture" />
+        </div>
+        <h3>Fun Facts About French Language</h3>
+        <ul>
+            <li>French has a large number of silent letters, particularly at the end of words.</li>
+            <li>French has many borrowed words from English, particularly in the fields of technology, business, and fashion.</li>
+            <li>The French language has two forms of the word "you": "tu" (informal) and "vous" (formal).</li>
+        </ul>
+        <br><br>
+        <h3>Learning Tips for French</h3>
+        <ul>
+            <li><strong>Focus on pronunciation:</strong> French pronunciation can be tricky, especially with nasal vowels and silent letters, so practice speaking with native speakers.</li>
+            <li><strong>Learn gendered nouns:</strong> French nouns are either masculine or feminine, so it's essential to learn the gender along with the noun.</li>
+            <li><strong>Watch French films and listen to French music:</strong> This helps improve your listening skills and familiarize yourself with the rhythm and intonation of the language.</li>
+            <li><strong>Use language learning apps:</strong> Duolingo, Memrise, and Babbel are excellent resources for learning French at your own pace.</li>
+        </ul>
+        <br><br>
+        <!-- Display Download Link for French PDF -->
+        <h3>Download Materials</h3>
+        <ul id="french-pdf-links">
+            <li><a href="{% static 'Documents/French_book.pdf' %}" download>Download French Book PDF</a></li>
+            <li><a href="{% static 'Documents/Basic_French.pdf' %}" download>Download Basic French Language Book PDF</a></li>
+        </ul>
+    </div>
+</section>
+
+<style>
+    /* General Page Styling */
+    .image {
+        display: flex;
+        justify-content: center;
+        /* Centers the image horizontally */
+        align-items: center;
+        /* Centers the image vertically */
+        height: 100%;
+        /* Ensure the parent div has height to center vertically */
+    }
+
+    .image img {
+        width: 100%;
+        /* Makes the image responsive to the container's width */
+        max-width: 300px;
+        /* Limits the maximum width to 300px */
+        height: auto;
+        /* Maintains the aspect ratio */
+        border-radius: 8px;
+        /* Optional: Adds rounded corners to the image */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Optional: Adds a soft shadow to the image */
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #504b2c;
+        padding: 20px 0;
+        text-align: center;
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container h1 {
+        margin: 0;
+        font-size: 2.5em;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav ul li {
+        display: inline;
+        margin: 0 20px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1em;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #f39c12;
+    }
+
+    main {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Language Section */
+    .language-section {
+        background-color: #ffffff;
+        margin: 20px 0;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .language-section:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .language-section h2 {
+        text-align: center;
+        font-size: 2.5em;
+        color: #333;
+    }
+
+    .language-content h3 {
+        font-size: 1.6em;
+        color: #555;
+        margin-bottom: 15px;
+    }
+
+    .language-content p,
+    .language-content ul {
+        font-size: 1.2em;
+        line-height: 1.8;
+        color: #666;
+    }
+
+    .language-content ul {
+        list-style-type: square;
+        margin-left: 30px;
+    }
+
+    .language-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+    }
+
+    .language-image img {
+        width: 85%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .language-image img:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+</html>
